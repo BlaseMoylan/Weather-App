@@ -1,46 +1,5 @@
-// import './App.css';
-// import React, { useEffect, useState } from "react";
-// import Weather from './components/weather';
-// import { Dimmer, Loader } from 'semantic-ui-react';
-// export default function App() {
-  
-//   const [lat, setLat] = useState([]);
-//   const [long, setLong] = useState([]);
-//   const [data, setData] = useState([]);
-
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       navigator.geolocation.getCurrentPosition(function(position) {
-//         setLat(position.coords.latitude);
-//         setLong(position.coords.longitude);
-//       });
-
-//       await fetch(`${process.env.REACT_APP_API_URL}/weather/?lat=${lat}&lon=${long}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`)
-//       .then(res => res.json())
-//       .then(result => {
-//         setData(result)
-//         console.log(result);
-//       });
-//     }
-//     fetchData();
-//   }, [lat,long])
-  
-//   return (
-//     <div className="App">
-//       {(typeof data.main != 'undefined') ? (
-//         <Weather weatherData={data}/>
-//       ): (
-//         <div>
-//           <Dimmer active>
-//             <Loader>Loading..</Loader>
-//           </Dimmer>
-//        </div>
-//      )}
-//  </div>
-//   );
-// }
 import './App.css';
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import Weather from './components/weather';
 import { Dimmer, Loader } from 'semantic-ui-react';
 
@@ -48,42 +7,46 @@ export default function App() {
   const [lat, setLat] = useState(null);
   const [long, setLong] = useState(null);
   const [data, setData] = useState(null);
-  const [reload, setReload] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const fetchData = async () => {
+    if (lat && long) {
+      setIsLoading(true);
+
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/weather/?lat=${lat}&lon=${long}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`
+      );
+      const result = await response.json();
+
+      setTimeout(() => {
+        setData(result);
+        setIsLoading(false);
+      }, 1000); // Simulating a delay for demonstration purposes
+    }
+  };
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(function(position) {
+    navigator.geolocation.getCurrentPosition(function (position) {
       setLat(position.coords.latitude);
       setLong(position.coords.longitude);
     });
   }, []);
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (lat && long) {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/weather/?lat=${lat}&lon=${long}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`);
-        const result = await response.json();
-        setData(result);
-        console.log(result);
-      }
-    };
     fetchData();
-  }, [lat, long, reload]);
-
-  const handleReload = () => {
-    setReload(prevReload => !prevReload);
-  };
+  }, [lat, long]);
 
   return (
     <div className="App">
-      <button onClick={handleReload}>Reload</button>
-      {data ? (
-        <Weather weatherData={data} />
-      ) : (
-        <div>
+
+      {isLoading ? (
+        <div className="loading-container">
           <Dimmer active>
             <Loader>Loading..</Loader>
           </Dimmer>
         </div>
+      ) : (
+        <Weather weatherData={data} />
       )}
     </div>
   );

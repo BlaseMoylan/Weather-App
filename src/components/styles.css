@@ -65,3 +65,16 @@
     width: 35px;
     height: 35px;
 }
+/* .button {
+    width: 35px;
+    height: 35px;
+    transition: opacity 5.5s ease;
+    opacity: 1;
+  }
+  
+.button.fade-out {
+width: 35px;
+height: 35px;
+transition: opacity 5.5s ease;
+opacity: 0;
+} */
