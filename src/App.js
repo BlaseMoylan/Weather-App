@@ -1,16 +1,26 @@
-
 import './App.css';
 import React, { useEffect, useState } from 'react';
 import Weather from './components/weather';
 import { Dimmer, Loader } from 'semantic-ui-react';
 import axios from 'axios';
 
+/**
+ * App component renders the weather information based on the user's location.
+ * It retrieves weather data using the OpenWeatherMap API.
+ * @returns {JSX.Element} App component JSX.
+ */
 export default function App() {
   const [lat, setLat] = useState(null);
   const [long, setLong] = useState(null);
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  /**
+   * Fetches weather data based on the user's location.
+   * It makes a GET request to the OpenWeatherMap API using Axios.
+   * If successful, sets the weather data and stops loading.
+   * If there's an error, logs the error message.
+   */
   const fetchData = async () => {
     if (lat && long) {
       setIsLoading(true);
@@ -21,15 +31,18 @@ export default function App() {
         );
         const result = response.data;
 
-        setData(result);
+        setTimeout(() => {
+          setData(result);
+          setIsLoading(false);
+        }, 1000); // Simulating a delay for demonstration purposes
       } catch (error) {
         console.error('Error fetching weather data:', error);
-      } finally {
         setIsLoading(false);
       }
     }
   };
 
+  // Retrieves the user's current geolocation coordinates
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {
       setLat(position.coords.latitude);
@@ -37,6 +50,7 @@ export default function App() {
     });
   }, []);
 
+  // Fetches weather data when the latitude or longitude changes
   useEffect(() => {
     fetchData();
   }, [lat, long]);

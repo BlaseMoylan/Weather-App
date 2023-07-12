@@ -9,6 +9,12 @@ const refresh = () => {
   window.location.reload();
 }
 
+/**
+ * WeatherCard component displays weather information.
+ * @param {Object} weatherData - Weather data object containing weather details.
+ * @returns {JSX.Element} WeatherCard component JSX.
+ */
+
 const WeatherCard = ({weatherData}) => (
   <div className="main">
 
