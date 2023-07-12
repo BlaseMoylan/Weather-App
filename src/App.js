@@ -1,7 +1,9 @@
+
 import './App.css';
 import React, { useEffect, useState } from 'react';
 import Weather from './components/weather';
 import { Dimmer, Loader } from 'semantic-ui-react';
+import axios from 'axios';
 
 export default function App() {
   const [lat, setLat] = useState(null);
@@ -13,15 +15,18 @@ export default function App() {
     if (lat && long) {
       setIsLoading(true);
 
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/weather/?lat=${lat}&lon=${long}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`
-      );
-      const result = await response.json();
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/weather/?lat=${lat}&lon=${long}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`
+        );
+        const result = response.data;
 
-      setTimeout(() => {
         setData(result);
+      } catch (error) {
+        console.error('Error fetching weather data:', error);
+      } finally {
         setIsLoading(false);
-      }, 1000); // Simulating a delay for demonstration purposes
+      }
     }
   };
 
@@ -38,7 +43,6 @@ export default function App() {
 
   return (
     <div className="App">
-
       {isLoading ? (
         <div className="loading-container">
           <Dimmer active>
