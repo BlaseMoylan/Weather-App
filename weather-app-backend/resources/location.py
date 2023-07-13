@@ -33,4 +33,4 @@ class IndividualLocation(Resource):
         location = Location.query.get_or404(location_id)
         db.session.delete(location)
         db.session.commit()
-        return 'Successfully Deleted', 200
+        return f'{location.name} Successfully Deleted', 200
