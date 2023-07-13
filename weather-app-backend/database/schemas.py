@@ -42,3 +42,6 @@ class LocationSchema(ma.Schema):
 
     class Meta:
         fields = ("id", "lattitude", "longitude", "user_id")
+
+location_schema = LocationSchema()
+locations_schema = LocationSchema(many=True)
