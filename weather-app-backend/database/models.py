@@ -4,12 +4,10 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(255), nullable=False, unique=True)
+    id = db.Column(db.Integer(), primary_key=True)
     password = db.Column(db.String(255), nullable=False)
-    first_name = db.Column(db.String(255), nullable=False)
-    last_name = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
+    phone_number = db.Column(db.String(255))
 
     def hash_password(self):
         self.password = generate_password_hash(self.password).decode('utf8')
@@ -18,4 +16,4 @@ class User(db.Model):
         return check_password_hash(self.password, password)
 
     def __repr__(self):
-        return self.username
+        return self.email

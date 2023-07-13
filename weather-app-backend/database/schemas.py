@@ -10,13 +10,11 @@ class RegisterSchema(ma.Schema):
     Schema used for registration, includes password
     """
     id = fields.Integer(primary_key=True)
-    username = fields.String(required=True)
     password = fields.String(required=True)
-    first_name = fields.String(required=True)
-    last_name = fields.String(required=True)
     email = fields.String(required=True)
+    phone_number = fields.String()
     class Meta:
-        fields = ("id", "username",  "password", "first_name", "last_name", "email")
+        fields = ("id", "password", "email", "phone_number")
 
     @post_load
     def create_user(self, data, **kwargs):
@@ -27,12 +25,10 @@ class UserSchema(ma.Schema):
     Schema used for displaying users, does NOT include password
     """
     id = fields.Integer(primary_key=True)
-    username = fields.String(required=True)
-    first_name = fields.String(required=True)
-    last_name = fields.String(required=True)
     email = fields.String(required=True)
+    phone_number = fields.String()
     class Meta:
-        fields = ("id", "username", "first_name", "last_name", "email",)
+        fields = ("id", "email", "phone_number")
 
 register_schema = RegisterSchema()
 user_schema = UserSchema()

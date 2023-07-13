@@ -25,18 +25,17 @@ class LoginResource(Resource):
     def post(self):
         form_data = request.get_json()
         user = db.one_or_404(
-            User.query.filter_by(username=form_data.get('username')),
+            User.query.filter_by(email=form_data.get('email')),
             description=f"No user with that username."
         )
         authorized = user.check_password(form_data.get('password'))
         if not authorized:
-            return {'error': 'Username or password invalid'}, 401
+            return {'error': 'email or password invalid'}, 401
         expires = datetime.timedelta(days=7)
         print(user.id)
         additional_claims = {
             'id': user.id,
-            'username': user.username,
-            'first_name': user.first_name
+            'email': user.email
         }
         access_token = create_access_token(identity=str(user.id), additional_claims=additional_claims, expires_delta=expires)
         return {'access': access_token}, 200
