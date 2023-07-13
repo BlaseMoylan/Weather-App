@@ -7,6 +7,7 @@ from flask_migrate import Migrate
 from database.models import db
 from database.schemas import ma
 from resources.auth import LoginResource, RegisterResource
+from resources.location import Locations, IndividualLocation
 from dotenv import load_dotenv
 from os import environ
 
@@ -52,6 +53,8 @@ def create_routes():
     api = Api()
     api.add_resource(RegisterResource, '/api/auth/register')
     api.add_resource(LoginResource, '/api/auth/login')
+    api.add_resource(Locations, '/api/locations')
+    api.add_resource(IndividualLocation, '/api/location/<int:location_id>')
 
     return api
 

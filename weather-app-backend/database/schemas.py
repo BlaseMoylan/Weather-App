@@ -1,6 +1,6 @@
 from flask_marshmallow import Marshmallow
 from marshmallow import post_load, fields
-from database.models import User
+from database.models import User, Location
 
 ma = Marshmallow()
 
@@ -39,10 +39,14 @@ class LocationSchema(ma.Schema):
     name = fields.String(required=True)
     lattitude = fields.Integer(required=True)
     longitude = fields.Integer(required=True)
-    user_id = fields.Integer(required=True)
+    user_id = fields.Integer()
 
     class Meta:
         fields = ("id", "name", "lattitude", "longitude", "user_id")
+
+    @post_load
+    def create_request(self, data, **kwargs):
+        return Location(**data)
 
 location_schema = LocationSchema()
 locations_schema = LocationSchema(many=True)

@@ -3,7 +3,6 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask_restful import Resource
 from database.models import db, Location
 from database.schemas import location_schema, locations_schema
-from marshmallow import ValidationError
 
 class Locations(Resource):
     @jwt_required()
@@ -30,7 +29,7 @@ class IndividualLocation(Resource):
 
     @jwt_required()
     def delete(self, location_id):
-        location = Location.query.get_or404(location_id)
+        location = Location.query.get_or_404(location_id)
         db.session.delete(location)
         db.session.commit()
         return f'{location.name} Successfully Deleted', 200
