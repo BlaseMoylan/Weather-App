@@ -17,3 +17,9 @@ class User(db.Model):
 
     def __repr__(self):
         return self.email
+
+class Location(db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
+    lattitude= db.Column(db.Integer(), nullable=False)
+    Longitude = db.Column(db.Integer(), nullable=False)
+    user_id = db.Column(db.Integer(), db.ForeignKey('user.id'), nullable=False)

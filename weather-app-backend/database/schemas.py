@@ -33,3 +33,12 @@ class UserSchema(ma.Schema):
 register_schema = RegisterSchema()
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)
+
+class LocationSchema(ma.Schema):
+    id = fields.Integer(primary_key=True)
+    lattitude = fields.Integer(required=True)
+    longitude = fields.Integer(required=True)
+    user_id = fields.Integer(required=True)
+
+    class Meta:
+        fields = ("id", "lattitude", "longitude", "user_id")
