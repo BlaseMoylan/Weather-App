@@ -27,12 +27,15 @@ export default function App() {
 
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/weather/?lat=${lat}&lon=${long}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`
+          `https://api.openweathermap.org/data/2.5/weather/?lat=${lat}&lon=${long}&units=imperial&APPID=5d9c6432ec75c55bcee54659717e0ae1`
+          // 'https://api.openweathermap.org/data/2.5/weather/?lat=80&lon=80&units=metric&APPID=5d9c6432ec75c55bcee54659717e0ae1'
         );
+        console.log("dlahghalglaldflalsldkhglahl")
         const result = response.data;
-
+        setData(result);
+        console.log(data)
+        console.log(data.name)
         setTimeout(() => {
-          setData(result);
           setIsLoading(false);
         }, 1000); // Simulating a delay for demonstration purposes
       } catch (error) {
