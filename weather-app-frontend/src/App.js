@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import React, { useEffect, useState } from 'react';
 import Weather from './components/weather';
 import { Dimmer, Loader } from 'semantic-ui-react';
