@@ -24,7 +24,7 @@ export default function App() {
   const fetchData = async () => {
     if (lat && long) {
       setIsLoading(true);
-
+      console.log(`${process.env.REACT_APP_API_KEY}`)
       try {
         const response = await axios.get(
           `${process.env.REACT_APP_API_URL}/weather/?lat=${lat}&lon=${long}&units=imperial&APPID=${process.env.REACT_APP_API_KEY}`
