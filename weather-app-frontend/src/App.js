@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Weather from './components/Demo/weather';
 import { Dimmer, Loader } from 'semantic-ui-react';
 import axios from 'axios';
+import Navbar from './components/Navbar/Navbar';
 
 /**
  * App component renders the weather information based on the user's location.
@@ -66,7 +67,12 @@ export default function App() {
           </Dimmer>
         </div>
       ) : (
-        <Weather weatherData={data} />
+        <>
+          <Navbar />
+          <main>
+            <Weather weatherData={data} />
+          </main>
+        </>
       )}
     </div>
   );
