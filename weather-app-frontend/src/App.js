@@ -1,6 +1,6 @@
 import './App.scss';
 import React, { useEffect, useState } from 'react';
-import Weather from './components/weather';
+import Weather from './components/Demo/weather';
 import { Dimmer, Loader } from 'semantic-ui-react';
 import axios from 'axios';
 
