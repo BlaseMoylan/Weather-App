@@ -10,6 +10,7 @@ import Navbar from './components/Navbar/Navbar';
  * It retrieves weather data using the OpenWeatherMap API.
  * @returns {JSX.Element} App component JSX.
  */
+
 export default function App() {
   const [lat, setLat] = useState(null);
   const [long, setLong] = useState(null);
@@ -22,25 +23,28 @@ export default function App() {
    * If successful, sets the weather data and stops loading.
    * If there's an error, logs the error message.
    */
+
   const fetchData = async () => {
     if (lat && long) {
       setIsLoading(true);
-      console.log(`${process.env.REACT_APP_API_KEY}`)
+
+      console.log(long, lat)
       try {
         const response = await axios.get(
           `${process.env.REACT_APP_API_URL}/weather/?lat=${lat}&lon=${long}&units=imperial&APPID=${process.env.REACT_APP_API_KEY}`
         );
-        console.log("dlahghalglaldflalsldkhglahl")
+
         const result = response.data;
         setData(result);
-        console.log(data)
-        console.log(data.name)
+
         setTimeout(() => {
           setIsLoading(false);
         }, 1000); // Simulating a delay for demonstration purposes
+
       } catch (error) {
         console.error('Error fetching weather data:', error);
         setIsLoading(false);
+
       }
     }
   };
@@ -68,7 +72,7 @@ export default function App() {
         </div>
       ) : (
         <>
-          <Navbar />
+          <Navbar setLong={setLong} setLat={setLat} />
           <main>
             <Weather weatherData={data} />
           </main>
