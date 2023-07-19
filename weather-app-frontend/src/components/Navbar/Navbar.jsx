@@ -15,9 +15,19 @@ const Navbar = ({setLong, setLat}) => {
 
     return (
         <nav>
-            <SearchBox value={value} onChange={(change)=>setValue(change)} onRetrieve={(result) => choosenLocation(result)} theme={{variables:{boxShadow:'none', padding: '0px'}}}  options={{types:'city', language:'en'}} accessToken='pk.eyJ1IjoiYy1yb21hbmNhbnRyZWxsIiwiYSI6ImNsZ3h6MmliOTA0Z3IzZXBpZWpqOWNtbzQifQ.AA1tCkKxeoIpw4YGUsYTJQ' />
-            <h1>MySkies</h1>
-            <a href='#'>login/sign-up</a>
+
+            <div className='search-area'>
+                <SearchBox value={value} onChange={(change)=>setValue(change)} onRetrieve={(result) => choosenLocation(result)} theme={{variables:{boxShadow:'none'}}}  options={{types:'city', language:'en'}} accessToken='pk.eyJ1IjoiYy1yb21hbmNhbnRyZWxsIiwiYSI6ImNsZ3h6MmliOTA0Z3IzZXBpZWpqOWNtbzQifQ.AA1tCkKxeoIpw4YGUsYTJQ' />
+            </div>
+
+            <div>
+                <h1>MySkies</h1>
+            </div>
+
+            <div>
+                <a href='#'>login/sign-up</a>
+            </div>
+
         </nav>
     );
 }
