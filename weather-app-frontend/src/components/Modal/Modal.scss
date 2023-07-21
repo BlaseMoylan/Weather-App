@@ -1,17 +1,11 @@
-.modal-exit,
-.modal-space{
-    position: fixed;
-    background-color: rgba(0, 0, 0, 0.2);
-}
-
 .modal-exit{
+    background-color: rgba(0, 0, 0, 0.2);
     width: 100%;
     height: 100vh;
     height: 100dvh; //if available will override previous height
+    position: fixed;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.modal-space{
+    isolation: isolate;
 }

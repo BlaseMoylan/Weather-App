@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { SearchBox } from '@mapbox/search-js-react';
+import Authenticate from './Authentication/Authenticate';
 import Modal from '../Modal/Modal';
 import './Navbar.scss'
 
@@ -32,6 +33,7 @@ const Navbar = ({setLong, setLat}) => {
 
             </nav>
             <Modal close={()=>setShowLoginSignup(!showLoginSignup)} show={showLoginSignup}>
+                <Authenticate />
             </Modal>
         </>
     );
