@@ -31,7 +31,7 @@ const Navbar = ({setLong, setLat}) => {
                 <button className='login-signup' onClick={()=>setShowLoginSignup(!showLoginSignup)}>login/sign-up</button>
 
             </nav>
-            <Modal>
+            <Modal close={()=>setShowLoginSignup(!showLoginSignup)} show={showLoginSignup}>
             </Modal>
         </>
     );

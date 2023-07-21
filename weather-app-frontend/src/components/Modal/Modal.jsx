@@ -1,12 +1,14 @@
 import './Modal.scss'
 
-const Modal = ({children}) => {
+const Modal = ({close, show, children}) => {
     return (
-        <div className='modal-exit'>
-            <div className='modal-space'>
-                {children}
+        <>{show ?
+            <div className='modal-exit' onClick={close}>
+                <div className='modal-space'>
+                    {children}
+                </div>
             </div>
-        </div>
+        :null}</>
     );
 }
 
