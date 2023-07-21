@@ -13,21 +13,26 @@ nav{
         display: inline-block !important;
     }
 
-    a{
-        color: white;
+    h1{
+        display: inline;
+    }
+}
 
-        &:hover{
-            color: lightgrey;
-            text-decoration: underline;
-            cursor: pointer;
-        }
+.login-signup{
+    background-color: transparent;
+    border: none;
+    color: white;
+
+    &:hover{
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    &:active{
+        color: lightgrey;
     }
 }
 
 .search-area{
     width: 250px !important;
-}
-
-h1{
-    display: inline;
 }

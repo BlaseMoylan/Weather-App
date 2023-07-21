@@ -5,7 +5,9 @@ import './Navbar.scss'
 const Navbar = ({setLong, setLat}) => {
 
     const [value, setValue] = useState('');
+    const [showLoginSignup, setShowLoginSignup] = useState(false);
 
+    //sets the new Longitude and Latitude
     function choosenLocation(data){
         let [long, lat] = data.features[0].geometry.coordinates
         setValue(data.features[0].properties.name)
@@ -25,7 +27,7 @@ const Navbar = ({setLong, setLat}) => {
             </div>
 
             <div>
-                <a href='#'>login/sign-up</a>
+                <button className='login-signup' onClick={()=>setShowLoginSignup(!showLoginSignup)}>login/sign-up</button>
             </div>
 
         </nav>
