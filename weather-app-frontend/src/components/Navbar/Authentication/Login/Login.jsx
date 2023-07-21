@@ -1,8 +1,10 @@
-
+import './Login.scss'
 
 const Login = ({signup}) => {
     return (
         <>
+            <h2>Login</h2>
+
             <div>
                 <label>Email</label>
                 <input type='email' required />
@@ -13,7 +15,7 @@ const Login = ({signup}) => {
                 <input type='password' required />
             </div>
 
-            <div>
+            <div className='login-btn-area'>
                 <button>Forgot Password</button>
                 <button onClick={signup}>Sign-up</button>
             </div>

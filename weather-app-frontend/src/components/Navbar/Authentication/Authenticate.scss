@@ -1,3 +1,53 @@
 .authenticate{
     background-color: var(--Primary-color);
+    padding: 2rem;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+
+    div{
+        width: min(90vw, 300px);
+    }
+
+    input[type='email'],
+    input[type='password']{
+        width: 100%;
+        padding: .2rem .4rem;
+        font-size: 1.2rem;
+        outline: none;
+        border: none;
+        border-radius: 3px;
+    }
+
+    button{
+        border: none;
+        background-color: transparent;
+        color: white;
+
+        &:hover{
+            text-decoration: underline;
+        }
+
+        &:active{
+            color: lightgrey;
+        }
+    }
+
+    input[type='submit']{
+        font-size: 1.5rem;
+        color: white;
+        background-color: transparent;
+        border: solid white 1px;
+        border-radius: 5px;
+        padding: .4rem 2rem;
+        margin-top: 2rem;
+
+        &:hover{
+            cursor: pointer;
+            outline: solid white 1px;
+            font-weight: bold;
+        }
+    }
 }

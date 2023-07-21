@@ -1,8 +1,7 @@
-
-
 const Register = ({login}) => {
     return (
         <>
+            <h2>Sign-up</h2>
             <div>
                 <label>Email</label>
                 <input type="email" required />
@@ -17,6 +16,7 @@ const Register = ({login}) => {
                 <label>Verify Password</label>
                 <input type="password" required />
             </div>
+
             <button onClick={login}>Login</button>
         </>
     );
