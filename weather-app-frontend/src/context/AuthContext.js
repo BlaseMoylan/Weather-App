@@ -37,7 +37,7 @@ export const AuthProvider = ({children}) => {
                 phone_number: registerData.phoneNumber
             }
 
-            let response = await axios.post(`${baseUrl}/register`, finalData)
+            let response = await axios.post(`${baseUrl}/auth/register`, finalData)
 
             if(response.status === 201){
                 console.log('Successful Registration!')
@@ -54,7 +54,7 @@ export const AuthProvider = ({children}) => {
     const loginUser = async (loginData) => {
         try{
 
-            let response = await axios.post(`${baseUrl}/login`, loginData);
+            let response = await axios.post(`${baseUrl}/auth/login`, loginData);
 
             if(response.status === 200){
                 localStorage.setItem('token', JSON.stringify(response.data.access))

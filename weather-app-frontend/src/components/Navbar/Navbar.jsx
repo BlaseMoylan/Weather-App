@@ -1,13 +1,20 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { SearchBox } from '@mapbox/search-js-react';
+
 import Authenticate from './Authentication/Authenticate';
+import AuthContext from '../../context/AuthContext';
 import Modal from '../Modal/Modal';
 import './Navbar.scss'
 
 const Navbar = ({setLong, setLat}) => {
 
+    const {user, logoutUser} = useContext(AuthContext)
     const [value, setValue] = useState('');
     const [showLoginSignup, setShowLoginSignup] = useState(false);
+
+    useEffect(() => {
+        setShowLoginSignup(false)
+    }, [user]);
 
     //sets the new Longitude and Latitude
     function choosenLocation(data){
@@ -29,7 +36,7 @@ const Navbar = ({setLong, setLat}) => {
                     <h1>MySkies</h1>
                 </div>
 
-                <button className='login-signup' onClick={()=>setShowLoginSignup(!showLoginSignup)}>login/sign-up</button>
+                {user ? <button onClick={logoutUser}>{user.email}</button> : <button className='login-signup' onClick={()=>setShowLoginSignup(!showLoginSignup)}>login/sign-up</button>}
 
             </nav>
             <Modal close={()=>setShowLoginSignup(!showLoginSignup)} show={showLoginSignup}>
