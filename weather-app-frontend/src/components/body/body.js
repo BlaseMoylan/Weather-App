@@ -33,6 +33,10 @@ export default function body({lat,long}){
           setIsLoading(true);
     
           try {
+            // this gets the next 5 days current day not included
+            // this gives a forcast for every three hours each day - 8 hours forecasted each day
+                    // so every 9th item in the list is the start of a new day
+                // need to consolidate this data and get the overall max and min for each day
             const response = await axios.get(
               `${process.env.REACT_APP_API_URL}/forecast?lat=${lat}&lon=${long}&units=imperial&APPID=${process.env.REACT_APP_API_KEY}`
             );
