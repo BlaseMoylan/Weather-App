@@ -1,0 +1,61 @@
+.hide{
+    visibility: hidden;
+}
+
+.instructions{
+    background-color: #424242;
+    position: relative;
+    padding-block: .3rem;
+    border-radius: 0 0 5px 5px;
+
+    p{
+        padding-left: 2rem;
+    }
+
+    ul{
+        padding-left: 3rem;
+    }
+}
+
+.info-icon{
+    position: absolute;
+    top: .5rem;
+    left: .5rem;
+}
+
+.offscreen{
+    position: absolute;
+    left: 500%;
+}
+
+.errMsg{
+    width: 100%;
+    padding: .5rem;
+    color: red;
+    font-weight: bold;
+    background-color: rgb(255, 200, 200);
+    border: 2px solid red;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.check,
+.wrong{
+    position: absolute;
+    right: 0;
+    border: 1px solid white;
+    border-radius: 1rem;
+    padding: 2px;
+}
+
+.check{
+    background-color: green;
+}
+
+.wrong{
+    background-color: red;
+}
+
+.sign-in{
+    width: 100%;
+}

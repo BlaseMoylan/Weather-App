@@ -4,7 +4,9 @@ from flask_restful import Resource
 from database.models import db, User
 from database.schemas import register_schema, user_schema
 from marshmallow import ValidationError
+from sqlalchemy.exc import IntegrityError
 import datetime
+
 
 
 class RegisterResource(Resource):
@@ -19,6 +21,8 @@ class RegisterResource(Resource):
             return user_schema.dump(new_user), 201
         except ValidationError as err:
             return err.messages, 400
+        except IntegrityError as err:
+            return str(err.__dict__['orig']), 409
 
 class LoginResource(Resource):
     """ User Login, responds with access token """
