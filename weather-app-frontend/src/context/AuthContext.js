@@ -47,13 +47,18 @@ export const AuthProvider = ({children}) => {
             }
 
         }catch(error) {
-            console.log(error)
+            if(!error?.response){
+                return 'No Server Response'
+            } else if(error.response?.status === 409){
+                return 'Email already exist'
+            } else {
+                return 'Registration Failed'
+            }
         }
     }
 
     const loginUser = async (loginData) => {
         try{
-
             let response = await axios.post(`${baseUrl}/auth/login`, loginData);
 
             if(response.status === 200){
