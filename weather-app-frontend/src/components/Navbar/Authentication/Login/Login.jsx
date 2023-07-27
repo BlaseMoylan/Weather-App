@@ -26,7 +26,7 @@ const Login = ({signup}) => {
             </div>
 
             <div className='login-btn-area'>
-                <button>Forgot Password</button>
+                <button className='forgot-password'>Forgot Password</button>
                 <button onClick={signup}>Sign-up</button>
             </div>
 

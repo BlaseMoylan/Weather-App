@@ -2,3 +2,12 @@
     display: flex;
     justify-content: space-between;
 }
+
+.forgot-password{
+    text-decoration: none !important;
+
+    &:hover{
+        text-decoration: underline !important;
+        color: white !important;
+    }
+}
