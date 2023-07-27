@@ -26,9 +26,10 @@
         border: none;
         background-color: transparent;
         color: white;
+        text-decoration: underline;
 
         &:hover{
-            text-decoration: underline;
+            color: rgb(128, 141, 255);
         }
 
         &:active{
@@ -60,4 +61,8 @@
             color: rgb(150, 150, 150);
         }
     }
+}
+
+.form-group{
+    position: relative;
 }

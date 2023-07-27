@@ -6,7 +6,7 @@ import AuthContext from '../../../../context/AuthContext';
 import './Register.scss'
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%-]).{8,24}$/
+const PWD_REGEX = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%-]).{8,24}$/
 
 const Register = ({login}) => {
 
@@ -82,7 +82,7 @@ const Register = ({login}) => {
 
             <div className='form-group'>
                 <label htmlFor='email'>
-                    Email:
+                    Email
 
                     <span className={validEmail ? 'valid' : 'hide'}>
                         <FontAwesomeIcon icon={faCheck} className='check'/>
@@ -109,11 +109,13 @@ const Register = ({login}) => {
 
                 <div id='email_note' className={emailFocus && email && !validEmail ? 'instructions' : 'offscreen'}>
                     <FontAwesomeIcon icon={faInfoCircle} className='info-icon'/>
-                    <span aria-label='Your Email'>YourEmail</span>
-                    <span aria-label='at symbol'>@</span>
-                    Example
-                    <span aria-label='dot'>.</span>
-                    com
+                    <p>
+                        <span aria-label='Your Email'>YourEmail</span>
+                        <span aria-label='at symbol'>@</span>
+                        Example
+                        <span aria-label='dot'>.</span>
+                        com
+                    </p>
                 </div>
             </div>
 
@@ -144,10 +146,11 @@ const Register = ({login}) => {
 
                 <div id='pwd_note' className={pwdFocus && !validPwd ? 'instructions' : 'offscreen'}>
                     <FontAwesomeIcon icon={faInfoCircle} className='info-icon'/>
-                    Password must contain 8 to 24 characters and:
+                    <p>Password must be:</p>
 
                     <ul>
-                        <li>Must include uppercase and lowercase letters</li>
+                        <li>Between 8 to 24 characters</li>
+                        <li>At least 1 letter</li>
                         <li>At least 1 number</li>
                         <li>
                             At least 1 special character:
@@ -189,7 +192,7 @@ const Register = ({login}) => {
 
                 <div id='confirm_note' className={matchFocus && !validMatch ? 'instructions' : 'offscreen'}>
                     <FontAwesomeIcon icon={faInfoCircle} className='info-icon'/>
-                    Must match the first password input field.
+                    <p>Must match password</p>
                 </div>
             </div>
 
@@ -206,7 +209,7 @@ const Register = ({login}) => {
 
             <input type='submit' disabled={!validEmail || !validPwd || !validMatch ? true : false}/>
 
-            <p>
+            <p className='sign-in'>
                 Already registered?<br/>
                 <button onClick={login}>Sign In</button>
             </p>
