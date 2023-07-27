@@ -36,8 +36,11 @@ export default function body({lat,long}){
     // option2:
       // consolidate the hours data into the data that is desired for each day 
         // so that each day is set to a dictionary of wanted data set to that days forcasted data
+    // might need to do option two anyway
 
     // need to figure out how to map this inorder to get the above outcomes
+      // mostly figured that out - now trying to find the best way to get the info condensed even more 
+        // into a ditionary showing the overall info for each day
     const [day1,setDay1]=useState([])
     const [day2,setDay2]=useState([])
     const [day3,setDay3]=useState([])
