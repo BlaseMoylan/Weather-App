@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext, useRef, useEffect } from 'react';
 
 import AuthContext from '../../../../context/AuthContext';
 import useCustomForm from '../../../../hooks/useCustomForm';
@@ -6,10 +6,16 @@ import './Login.scss'
 
 const Login = ({signup}) => {
 
+    const emailRef = useRef()
+
     const { loginUser } = useContext(AuthContext)
 
     const defaultValues = {email: "", password: ""}
     const [formData, handleInputChange, handleSubmit] = useCustomForm(defaultValues, loginUser)
+
+    useEffect(() => {
+        emailRef.current.focus()
+    }, []);
 
     return (
         <form className='authenticate' onSubmit={handleSubmit}>
@@ -17,12 +23,27 @@ const Login = ({signup}) => {
 
             <div>
                 <label>Email</label>
-                <input type='email' name='email' value={formData.email} onChange={handleInputChange} autoComplete='off' required />
+                <input
+                    type='email'
+                    name='email'
+                    ref={emailRef}
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    autoComplete='off'
+                    required
+                />
             </div>
 
             <div>
                 <label>Password</label>
-                <input type='password' name='password' value={formData.password} onChange={handleInputChange} autoComplete='off' required />
+                <input
+                    type='password'
+                    name='password'
+                    value={formData.password}
+                    onChange={handleInputChange}
+                    autoComplete='off'
+                    required
+                />
             </div>
 
             <div className='login-btn-area'>
