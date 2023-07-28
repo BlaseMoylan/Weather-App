@@ -18,14 +18,14 @@
     // maping over each day and returning the custom card for that
 // displays each day >
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import React from "react";
 import axios from "axios";
-import "./body.css"
+import "./WeatherDisplay.css"
 
-export default function body({lat,long}){
+export default function WeatherDisplay({lat,long}){
     // the default useState will need to be set to the home location of the account ( I will work on this later )
-    // 
+    //
     const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     // need to get current Day separetly
@@ -34,22 +34,27 @@ export default function body({lat,long}){
     // option1:
       // set each day to a list of the 8 hours in each day
     // option2:
-      // consolidate the hours data into the data that is desired for each day 
+      // consolidate the hours data into the data that is desired for each day
         // so that each day is set to a dictionary of wanted data set to that days forcasted data
     // might need to do option two anyway
 
     // need to figure out how to map this inorder to get the above outcomes
-      // mostly figured that out - now trying to find the best way to get the info condensed even more 
+      // mostly figured that out - now trying to find the best way to get the info condensed even more
         // into a ditionary showing the overall info for each day
     const [day1,setDay1]=useState([])
     const [day2,setDay2]=useState([])
     const [day3,setDay3]=useState([])
     const [day4,setDay4]=useState([])
     const [day5,setDay5]=useState([])
+
+    useEffect(() => {
+      fetchData()
+    }, []);
+
     const fetchData = async () => {
         if (lat && long) {
           setIsLoading(true);
-    
+
           try {
             // this gets the next 5 days current day not included
             // this gives a forcast for every three hours each day - 8 hours forecasted each day
@@ -58,23 +63,25 @@ export default function body({lat,long}){
             const response = await axios.get(
               `${process.env.REACT_APP_API_URL}/forecast?lat=${lat}&lon=${long}&units=imperial&APPID=${process.env.REACT_APP_API_KEY}`
             );
-    
+
             const result = response.data;
             setData(result);
-    
+
             setTimeout(() => {
               setIsLoading(false);
             }, 1000); // Simulating a delay for demonstration purposes
-    
+
           } catch (error) {
             console.error('Error fetching weather data:', error);
             setIsLoading(false);
-    
+
           }
         }
       };
+
       console.log(data)
+
     return (
-        <div>body</div>
+        <div>WeatherDisplay</div>
     )
 }
