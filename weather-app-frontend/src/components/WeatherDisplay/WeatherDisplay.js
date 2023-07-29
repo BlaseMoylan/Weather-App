@@ -54,7 +54,7 @@ export default function WeatherDisplay({lat,long}){
     }, []);
     const fetchCurrentData = async ()=>{
         if (lat && long) {
-          setIsLoading(true);
+          // setIsLoading(true);
           try {
             const response = await axios.get(
               `${process.env.REACT_APP_API_URL}/weather/?lat=${lat}&lon=${long}&units=imperial&APPID=${process.env.REACT_APP_API_KEY}`
@@ -63,9 +63,9 @@ export default function WeatherDisplay({lat,long}){
             const result = response.data;
             setTodayData(result);
     
-            setTimeout(() => {
-              setIsLoading(false);
-            }, 1000); // Simulating a delay for demonstration purposes
+            // setTimeout(() => {
+            //   setIsLoading(false);
+            // }, 1000); // Simulating a delay for demonstration purposes
     
           } catch (error) {
             console.error('Error fetching weather data:', error);
@@ -103,8 +103,20 @@ export default function WeatherDisplay({lat,long}){
         }
       };
 
-      console.log(data)
+      console.log(forcastdata)
 
+    const getDate=(dt_txt)=>dt_txt.split(' ')[0]
+    const groupedDataByDay=data.reduce((result, item)=>{
+      const day= getDate(item.dt_txt)
+      if (!result[day]) {
+        result[day] = [];
+      }
+      result[day].push(item);
+      return result;
+    }, {});
+
+    const groupedDataArray = Object.values(groupedDataByDay);
+    console.log(groupedDataArray)
     return (
         <div>WeatherDisplay</div>
     )
