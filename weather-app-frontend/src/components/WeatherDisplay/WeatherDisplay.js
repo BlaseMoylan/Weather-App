@@ -26,7 +26,8 @@ import "./WeatherDisplay.css"
 export default function WeatherDisplay({lat,long}){
     // the default useState will need to be set to the home location of the account ( I will work on this later )
     //
-    const [data, setData] = useState(null);
+    const [todayData, setTodayData]= useState(null)
+    const [forcastdata, setForcastData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     // need to get current Day separetly
     const [currDay,setCurrDay]=useState([])
@@ -48,10 +49,33 @@ export default function WeatherDisplay({lat,long}){
     const [day5,setDay5]=useState([])
 
     useEffect(() => {
-      fetchData()
+      fetchCurrentData()
+      fetchForcastedData()
     }, []);
+    const fetchCurrentData = async ()=>{
+        if (lat && long) {
+          setIsLoading(true);
+          try {
+            const response = await axios.get(
+              `${process.env.REACT_APP_API_URL}/weather/?lat=${lat}&lon=${long}&units=imperial&APPID=${process.env.REACT_APP_API_KEY}`
+            );
+    
+            const result = response.data;
+            setTodayData(result);
+    
+            setTimeout(() => {
+              setIsLoading(false);
+            }, 1000); // Simulating a delay for demonstration purposes
+    
+          } catch (error) {
+            console.error('Error fetching weather data:', error);
+            setIsLoading(false);
+    
+          }
+        }
 
-    const fetchData = async () => {
+    }
+    const fetchForcastedData = async () => {
         if (lat && long) {
           setIsLoading(true);
 
@@ -65,7 +89,7 @@ export default function WeatherDisplay({lat,long}){
             );
 
             const result = response.data;
-            setData(result);
+            setForcastData(result);
 
             setTimeout(() => {
               setIsLoading(false);
