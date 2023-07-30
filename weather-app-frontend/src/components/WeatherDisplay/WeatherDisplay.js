@@ -89,7 +89,7 @@ export default function WeatherDisplay({lat,long}){
             );
 
             const result = response.data;
-            setForcastData(result);
+            setForcastData(result.list);
 
             setTimeout(() => {
               setIsLoading(false);
@@ -106,17 +106,19 @@ export default function WeatherDisplay({lat,long}){
       console.log(forcastdata)
 
     const getDate=(dt_txt)=>dt_txt.split(' ')[0]
-    const groupedDataByDay=data.reduce((result, item)=>{
-      const day= getDate(item.dt_txt)
-      if (!result[day]) {
-        result[day] = [];
-      }
-      result[day].push(item);
-      return result;
-    }, {});
+    if(forcastdata !==null){
+      const groupedDataByDay=forcastdata.reduce((result, item)=>{
+        const day= getDate(item.dt_txt)
+        if (!result[day]) {
+          result[day] = [];
+        }
+        result[day].push(item);
+        return result;
+      }, {});
 
-    const groupedDataArray = Object.values(groupedDataByDay);
-    console.log(groupedDataArray)
+      const groupedDataArray = Object.values(groupedDataByDay);
+      console.log(groupedDataArray)
+  }
     return (
         <div>WeatherDisplay</div>
     )
