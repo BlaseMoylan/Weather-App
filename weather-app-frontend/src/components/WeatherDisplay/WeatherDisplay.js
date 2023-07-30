@@ -42,16 +42,15 @@ export default function WeatherDisplay({lat,long}){
     // need to figure out how to map this inorder to get the above outcomes
       // mostly figured that out - now trying to find the best way to get the info condensed even more
         // into a ditionary showing the overall info for each day
-    const [day1,setDay1]=useState([])
-    const [day2,setDay2]=useState([])
-    const [day3,setDay3]=useState([])
-    const [day4,setDay4]=useState([])
-    const [day5,setDay5]=useState([])
+    const [day1,setDay1]=useState()
+    const [day2,setDay2]=useState()
+    const [day3,setDay3]=useState()
+    const [day4,setDay4]=useState()
 
     useEffect(() => {
       fetchCurrentData()
       fetchForcastedData()
-    }, []);
+    }, [lat,long]);
     const fetchCurrentData = async ()=>{
         if (lat && long) {
           // setIsLoading(true);
@@ -116,8 +115,19 @@ export default function WeatherDisplay({lat,long}){
         return result;
       }, {});
 
+      // each array in this array is an array of the hours for that day
       const groupedDataArray = Object.values(groupedDataByDay);
       console.log(groupedDataArray)
+      const forcastedDays=groupedDataArray.filter(item => item.length == 8)
+      // this is now the useable days (days with a complete forcast)
+      // need to iterate over this inorder to get the info per day that we want
+      console.log(forcastedDays)
+      // I am getting a render problem here
+      console.log(forcastedDays[0])
+      // setDay1(forcastedDays[0])
+      // setDay2(forcastedDays[1])
+      // setDay3(forcastedDays[2])
+      // setDay4(forcastedDays[3])
   }
     return (
         <div>WeatherDisplay</div>
