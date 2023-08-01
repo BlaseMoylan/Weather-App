@@ -166,16 +166,39 @@ export default function WeatherDisplay({lat,long}){
       return averageHumidity
     }
 
+    function getMostCommonWeatherDescription(weatherData){
+      if(weatherData.length===0){
+        return "No Data available"
+      }
+
+      const weatherDescriptionCounts = weatherData.reduce((counts, data)=> {
+        const description= data.weather[0].description
+        counts[description]=(counts[description] || 0) +1
+      },{})
+
+      let mostCommonDescription =""
+      let highestCount =0
+
+      for(const description in weatherDescriptionCounts){
+        if(weatherDescriptionCounts[description]> highestCount){
+          mostCommonDescription=description
+          highestCount=weatherDescriptionCounts[description]
+        }
+      }
+
+      return mostCommonDescription
+    }
+
     return (
       // need to munipulate data from the day states and send the max and min temp,average humidity, and weather discription down to the weather card component
       // also need to pass down the date
         <div>
           WeatherDisplay
           {/* look into mapping over the card component */}
-          <CardComponet minMax={getTemperatureStats(day1)} averageHumidity={getAverageHumidity(day1)} />
-          <CardComponet minMax={getTemperatureStats(day2)} averageHumidity={getAverageHumidity(day2)} />
-          <CardComponet minMax={getTemperatureStats(day3)} averageHumidity={getAverageHumidity(day3)} />
-          <CardComponet minMax={getTemperatureStats(day4)} averageHumidity={getAverageHumidity(day4)} />
+          <CardComponet minMax={getTemperatureStats(day1)} averageHumidity={getAverageHumidity(day1)} weatherDescription={getMostCommonWeatherDescription(day1)} date={day1[0].data.dt_txt.split(" ")[0]}/>
+          <CardComponet minMax={getTemperatureStats(day2)} averageHumidity={getAverageHumidity(day2)} weatherDescription={getMostCommonWeatherDescription(day2)} date={day2[0].data.dt_txt.split(" ")[0]}/>
+          <CardComponet minMax={getTemperatureStats(day3)} averageHumidity={getAverageHumidity(day3)} weatherDescription={getMostCommonWeatherDescription(day3)} date={day3[0].data.dt_txt.split(" ")[0]}/>
+          <CardComponet minMax={getTemperatureStats(day4)} averageHumidity={getAverageHumidity(day4)} weatherDescription={getMostCommonWeatherDescription(day4)} date={day4[0].data.dt_txt.split(" ")[0]}/>
         </div>
     )
 }
