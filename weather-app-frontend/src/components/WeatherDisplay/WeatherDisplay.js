@@ -156,16 +156,26 @@ export default function WeatherDisplay({lat,long}){
         
     }
 
+    function getAverageHumidity(weatherData){
+      if(weatherData.length===0){
+        return 0;
+      }
+
+      const totalHumidity=weatherData.reduce((sum, data) => sum + data.main.humidity, 0)
+      const averageHumidity=totalHumidity/weatherData.length;
+      return averageHumidity
+    }
+
     return (
       // need to munipulate data from the day states and send the max and min temp,average humidity, and weather discription down to the weather card component
       // also need to pass down the date
         <div>
           WeatherDisplay
           {/* look into mapping over the card component */}
-          <CardComponet minMax={getTemperatureStats(day1)} />
-          <CardComponet minMax={getTemperatureStats(day2)} />
-          <CardComponet minMax={getTemperatureStats(day3)} />
-          <CardComponet minMax={getTemperatureStats(day4)} />
+          <CardComponet minMax={getTemperatureStats(day1)} averageHumidity={getAverageHumidity(day1)} />
+          <CardComponet minMax={getTemperatureStats(day2)} averageHumidity={getAverageHumidity(day2)} />
+          <CardComponet minMax={getTemperatureStats(day3)} averageHumidity={getAverageHumidity(day3)} />
+          <CardComponet minMax={getTemperatureStats(day4)} averageHumidity={getAverageHumidity(day4)} />
         </div>
     )
 }
