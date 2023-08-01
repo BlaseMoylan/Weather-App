@@ -131,9 +131,41 @@ export default function WeatherDisplay({lat,long}){
         setDay4(forcastedDays[3])
       }
     },[forcastdata])
-  
-    return (
     
-        <div>WeatherDisplay</div>
+    function getTemperatureStats(weatherData){
+      return weatherData.reduce(
+        (acc, curr)=>{
+          const minTemp=curr.main.temp_min
+          const maxTemp=curr.main.temp_max
+
+          if(minTemp<acc.minTemp){
+            acc.minTemp=minTemp
+          }
+
+          if(maxTemp > acc.maxTemp){
+            acc.maxTemp=maxTemp
+          }
+
+          return acc;
+        },
+        {
+          minTemp:Infinity,
+          maxTemp:-Infinity,
+        }
+      )
+        
+    }
+
+    return (
+      // need to munipulate data from the day states and send the max and min temp,average humidity, and weather discription down to the weather card component
+      // also need to pass down the date
+        <div>
+          WeatherDisplay
+          {/* look into mapping over the card component */}
+          <CardComponet minMax={getTemperatureStats(day1)} />
+          <CardComponet minMax={getTemperatureStats(day2)} />
+          <CardComponet minMax={getTemperatureStats(day3)} />
+          <CardComponet minMax={getTemperatureStats(day4)} />
+        </div>
     )
 }
