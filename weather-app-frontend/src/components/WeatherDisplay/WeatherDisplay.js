@@ -131,7 +131,7 @@ export default function WeatherDisplay({lat,long}){
         setDay4(forcastedDays[3])
       }
     },[forcastdata])
-    
+    // want to get it so that these functions are condensed into one ( only if it does not make it a confusing mess!!!)
     function getTemperatureStats(weatherData){
       return weatherData.reduce(
         (acc, curr)=>{
@@ -195,6 +195,7 @@ export default function WeatherDisplay({lat,long}){
         <div>
           WeatherDisplay
           {/* look into mapping over the card component */}
+          {/* the card component still needs to be made and imported for this to work!!! */}
           <CardComponet minMax={getTemperatureStats(day1)} averageHumidity={getAverageHumidity(day1)} weatherDescription={getMostCommonWeatherDescription(day1)} date={day1[0].data.dt_txt.split(" ")[0]}/>
           <CardComponet minMax={getTemperatureStats(day2)} averageHumidity={getAverageHumidity(day2)} weatherDescription={getMostCommonWeatherDescription(day2)} date={day2[0].data.dt_txt.split(" ")[0]}/>
           <CardComponet minMax={getTemperatureStats(day3)} averageHumidity={getAverageHumidity(day3)} weatherDescription={getMostCommonWeatherDescription(day3)} date={day3[0].data.dt_txt.split(" ")[0]}/>
