@@ -105,31 +105,35 @@ export default function WeatherDisplay({lat,long}){
       console.log(forcastdata)
 
     const getDate=(dt_txt)=>dt_txt.split(' ')[0]
-    if(forcastdata !==null){
-      const groupedDataByDay=forcastdata.reduce((result, item)=>{
-        const day= getDate(item.dt_txt)
-        if (!result[day]) {
-          result[day] = [];
-        }
-        result[day].push(item);
-        return result;
-      }, {});
+    useEffect(()=>{
+      if(forcastdata !==null){
+        const groupedDataByDay=forcastdata.reduce((result, item)=>{
+          const day= getDate(item.dt_txt)
+          if (!result[day]) {
+            result[day] = [];
+          }
+          result[day].push(item);
+          return result;
+        }, {});
 
-      // each array in this array is an array of the hours for that day
-      const groupedDataArray = Object.values(groupedDataByDay);
-      console.log(groupedDataArray)
-      const forcastedDays=groupedDataArray.filter(item => item.length == 8)
-      // this is now the useable days (days with a complete forcast)
-      // need to iterate over this inorder to get the info per day that we want
-      console.log(forcastedDays)
-      // I am getting a render problem here
-      console.log(forcastedDays[0])
-      // setDay1(forcastedDays[0])
-      // setDay2(forcastedDays[1])
-      // setDay3(forcastedDays[2])
-      // setDay4(forcastedDays[3])
-  }
+        // each array in this array is an array of the hours for that day
+        const groupedDataArray = Object.values(groupedDataByDay);
+        console.log(groupedDataArray)
+        const forcastedDays=groupedDataArray.filter(item => item.length == 8)
+        // this is now the useable days (days with a complete forcast)
+        // need to iterate over this inorder to get the info per day that we want
+        console.log(forcastedDays)
+        console.log(forcastedDays[0])
+        // I am getting a render problem here
+        setDay1(forcastedDays[0])
+        setDay2(forcastedDays[1])
+        setDay3(forcastedDays[2])
+        setDay4(forcastedDays[3])
+      }
+    },[forcastdata])
+  
     return (
+    
         <div>WeatherDisplay</div>
     )
 }
