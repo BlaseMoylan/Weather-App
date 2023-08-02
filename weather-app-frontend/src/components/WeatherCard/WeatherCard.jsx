@@ -1,6 +1,7 @@
 import "./WeatherCard.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import breezeIcon from "../../assets/breezeIcon.png"
 import moment from "moment";
 import { Button } from "semantic-ui-react";
 
@@ -53,40 +54,40 @@ const WeatherCard = ({ weatherData }) => {
   };
 
   return (
-    <div className="main">
-      <div className="top">
-        <p className="header">{weatherCardData.name}</p>
-        <Button
-          className="button"
-          inverted
-          color="blue"
-          circular
-          icon="refresh"
-          onClick={refresh}
-        />
-      </div>
-      <div className="flex">
-        <p className="day">
-          {moment().format("dddd")}, <span>{moment().format("LL")}</span>
-        </p>
-        <p className="description">{weatherCardData.description}</p>
-      </div>
-
-      <div className="flex">
-        <p className="temp">Temperature: {weatherCardData.temperature} &deg;C</p>
-        <p className="temp">Humidity: {weatherCardData.humidity} %</p>
-      </div>
-
-      <div className="flex">
-        <p className="sunrise-sunset">
-          Sunrise:{" "}
-          {new Date(weatherData.sys.sunrise * 1000).toLocaleTimeString("en-IN")}
-        </p>
-        <p className="sunrise-sunset">
-          Sunset:{" "}
-          {new Date(weatherData.sys.sunset * 1000).toLocaleTimeString("en-IN")}
-        </p>
-      </div>
+    <div className="weather">
+        <div className="top">
+            <div>
+                <p className="city">{weatherData.name}</p>
+                <p className="weather-description">{weatherData.weather[0].description}</p>
+            </div>
+            {/* We need to find some delightful icons to put into this section. I found some free ones here https://www.iconfinder.com/weather-icons?price=free  */}
+            {/* <img alt="weather" className="weather-icon" src={`icons/${weatherData.weather[0].icon}.png`} /> */}
+            <img alt="weather" className="weather-icon" src={breezeIcon} />
+        </div>
+        <div className="bottom">
+            <p className="temperature">{Math.round(weatherData.main.temp)}°F</p>
+            <div className="details">
+                <div className="parameter-row">
+                    <span className="parameter-label">Details</span>
+                </div>
+                <div className="parameter-row">
+                    <span className="parameter-label">Feels like</span>
+                    <span className="parameter-value">{Math.round(weatherData.main.feels_like)}°F</span>
+                </div>
+                <div className="parameter-row">
+                    <span className="parameter-label">Wind</span>
+                    <span className="parameter-value">{weatherData.wind.speed} mph</span>
+                </div>
+                <div className="parameter-row">
+                    <span className="parameter-label">Humidity</span>
+                    <span className="parameter-value">{weatherData.main.humidity}%</span>
+                </div>
+                <div className="parameter-row">
+                    <span className="parameter-label">Pressure</span>
+                    <span className="parameter-value">{weatherData.main.pressure} hPa</span>
+                </div>
+            </div>
+        </div>
     </div>
   );
 };
