@@ -3,11 +3,11 @@
 
 
 // Takes in location
-    // figure out how to get 4 day forcast ( i am currently working on this )
+    // figure out how to get 4 day forecast ( i am currently working on this )
     // I will actualy be taking in the lat and long which is being held in app.js
 
-// make a call for the 4 day forcast
-    // I found this for a 5 day forcast:
+// make a call for the 4 day forecast
+    // I found this for a 5 day forecast:
         // "https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid={yourAPIKey}"
         // this does not take lat and long just the city name
         // there is also this:
@@ -27,7 +27,7 @@ export default function WeatherDisplay({lat,long}){
     // the default useState will need to be set to the home location of the account ( I will work on this later )
     //
     const [todayData, setTodayData]= useState(null)
-    const [forcastdata, setForcastData] = useState(null);
+    const [forecastdata, setForecastData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     // need to get current Day separetly
     const [currDay,setCurrDay]=useState([])
@@ -36,7 +36,7 @@ export default function WeatherDisplay({lat,long}){
       // set each day to a list of the 8 hours in each day
     // option2:
       // consolidate the hours data into the data that is desired for each day
-        // so that each day is set to a dictionary of wanted data set to that days forcasted data
+        // so that each day is set to a dictionary of wanted data set to that days forecasted data
     // might need to do option two anyway
 
     // need to figure out how to map this inorder to get the above outcomes
@@ -49,7 +49,7 @@ export default function WeatherDisplay({lat,long}){
 
     useEffect(() => {
       fetchCurrentData()
-      fetchForcastedData()
+      fetchForecastedData()
     }, [lat,long]);
     const fetchCurrentData = async ()=>{
         if (lat && long) {
@@ -74,13 +74,13 @@ export default function WeatherDisplay({lat,long}){
         }
 
     }
-    const fetchForcastedData = async () => {
+    const fetchForecastedData = async () => {
         if (lat && long) {
           setIsLoading(true);
 
           try {
             // this gets the next 5 days current day not included
-            // this gives a forcast for every three hours each day - 8 hours forecasted each day
+            // this gives a forecast for every three hours each day - 8 hours forecasted each day
                     // so every 9th item in the list is the start of a new day
                 // need to consolidate this data and get the overall max and min for each day
             const response = await axios.get(
@@ -88,7 +88,7 @@ export default function WeatherDisplay({lat,long}){
             );
 
             const result = response.data;
-            setForcastData(result.list);
+            setForecastData(result.list);
 
             setTimeout(() => {
               setIsLoading(false);
@@ -102,12 +102,12 @@ export default function WeatherDisplay({lat,long}){
         }
       };
 
-      console.log(forcastdata)
+      console.log(forecastdata)
 
     const getDate=(dt_txt)=>dt_txt.split(' ')[0]
     useEffect(()=>{
-      if(forcastdata !==null){
-        const groupedDataByDay=forcastdata.reduce((result, item)=>{
+      if(forecastdata !==null){
+        const groupedDataByDay=forecastdata.reduce((result, item)=>{
           const day= getDate(item.dt_txt)
           if (!result[day]) {
             result[day] = [];
@@ -119,18 +119,18 @@ export default function WeatherDisplay({lat,long}){
         // each array in this array is an array of the hours for that day
         const groupedDataArray = Object.values(groupedDataByDay);
         console.log(groupedDataArray)
-        const forcastedDays=groupedDataArray.filter(item => item.length == 8)
-        // this is now the useable days (days with a complete forcast)
+        const forecastedDays=groupedDataArray.filter(item => item.length == 8)
+        // this is now the useable days (days with a complete forecast)
         // need to iterate over this inorder to get the info per day that we want
-        console.log(forcastedDays)
-        console.log(forcastedDays[0])
+        console.log(forecastedDays)
+        console.log(forecastedDays[0])
         // I am getting a render problem here
-        setDay1(forcastedDays[0])
-        setDay2(forcastedDays[1])
-        setDay3(forcastedDays[2])
-        setDay4(forcastedDays[3])
+        setDay1(forecastedDays[0])
+        setDay2(forecastedDays[1])
+        setDay3(forecastedDays[2])
+        setDay4(forecastedDays[3])
       }
-    },[forcastdata])
+    },[forecastdata])
     // want to get it so that these functions are condensed into one ( only if it does not make it a confusing mess!!!)
     function getTemperatureStats(weatherData){
       return weatherData.reduce(
