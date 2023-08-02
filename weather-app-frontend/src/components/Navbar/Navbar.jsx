@@ -17,7 +17,7 @@ const Navbar = ({setLong, setLat}) => {
     }, [user]);
 
     //sets the new Longitude and Latitude
-    function choosenLocation(data){
+    function chosenLocation(data){
         let [long, lat] = data.features[0].geometry.coordinates
         setValue(data.features[0].properties.name)
         setLong(long)
@@ -29,7 +29,7 @@ const Navbar = ({setLong, setLat}) => {
             <nav>
 
                 <div className='search-area'>
-                    <SearchBox value={value} onChange={(change)=>setValue(change)} onRetrieve={(result) => choosenLocation(result)} theme={{variables:{boxShadow:'none'}}}  options={{types:'city', language:'en'}} accessToken='pk.eyJ1IjoiYy1yb21hbmNhbnRyZWxsIiwiYSI6ImNsZ3h6MmliOTA0Z3IzZXBpZWpqOWNtbzQifQ.AA1tCkKxeoIpw4YGUsYTJQ' />
+                    <SearchBox value={value} onChange={(change)=>setValue(change)} onRetrieve={(result) => chosenLocation(result)} theme={{variables:{boxShadow:'none'}}}  options={{types:'city', language:'en'}} accessToken='pk.eyJ1IjoiYy1yb21hbmNhbnRyZWxsIiwiYSI6ImNsZ3h6MmliOTA0Z3IzZXBpZWpqOWNtbzQifQ.AA1tCkKxeoIpw4YGUsYTJQ' />
                 </div>
 
                 <div>
