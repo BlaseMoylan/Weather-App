@@ -4,7 +4,7 @@ import { Dimmer, Loader } from 'semantic-ui-react';
 import axios from 'axios';
 import Navbar from './components/Navbar/Navbar';
 import WeatherDisplay from './components/WeatherDisplay/WeatherDisplay';
-import WeatherCard from './components/Demo/weather';
+import WeatherCard from './components/WeatherCard/WeatherCard';
 
 /**
  * App component renders the weather information based on the user's location.
