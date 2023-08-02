@@ -51,6 +51,7 @@ export default function WeatherDisplay({lat,long}){
       fetchCurrentData()
       fetchForcastedData()
     }, [lat,long]);
+
     const fetchCurrentData = async ()=>{
         if (lat && long) {
           // setIsLoading(true);
@@ -58,22 +59,22 @@ export default function WeatherDisplay({lat,long}){
             const response = await axios.get(
               `${process.env.REACT_APP_API_URL}/weather/?lat=${lat}&lon=${long}&units=imperial&APPID=${process.env.REACT_APP_API_KEY}`
             );
-    
+
             const result = response.data;
             setTodayData(result);
-    
+
             // setTimeout(() => {
             //   setIsLoading(false);
             // }, 1000); // Simulating a delay for demonstration purposes
-    
+
           } catch (error) {
             console.error('Error fetching weather data:', error);
             setIsLoading(false);
-    
+
           }
         }
-
     }
+
     const fetchForcastedData = async () => {
         if (lat && long) {
           setIsLoading(true);
