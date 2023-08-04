@@ -6,7 +6,7 @@ from flask_restful import Api
 from flask_migrate import Migrate
 from database.models import db
 from database.schemas import ma
-from resources.auth import LoginResource, RegisterResource
+from resources.auth import LoginResource, RegisterResource, ForgotPasswordResource, ResetResource
 from resources.location import Locations, IndividualLocation
 from dotenv import load_dotenv
 from flask_mail import Mail
@@ -66,6 +66,8 @@ def create_routes():
     api.add_resource(LoginResource, '/api/auth/login')
     api.add_resource(Locations, '/api/locations')
     api.add_resource(IndividualLocation, '/api/location/<int:location_id>')
+    api.add_resource(ForgotPasswordResource, '/api/auth/forgot_password')
+    api.add_resource(ResetResource, '/api/auth/reset_password/<str:token>')
 
     return api
 
