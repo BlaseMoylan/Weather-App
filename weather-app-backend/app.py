@@ -6,10 +6,10 @@ from flask_restful import Api
 from flask_migrate import Migrate
 from database.models import db
 from database.schemas import ma
+from resources.email import mail
 from resources.auth import LoginResource, RegisterResource, ForgotPasswordResource, ResetResource
 from resources.location import Locations, IndividualLocation
 from dotenv import load_dotenv
-from flask_mail import Mail
 from os import environ
 
 # Adds variables from .env file to environment
@@ -20,7 +20,6 @@ bcrypt = Bcrypt()
 jwt= JWTManager()
 cors = CORS()
 migrate = Migrate()
-mail = Mail()
 
 def create_app():
     """
