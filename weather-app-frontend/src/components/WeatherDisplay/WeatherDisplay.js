@@ -22,6 +22,7 @@ import { useState, useEffect } from "react";
 import React from "react";
 import axios from "axios";
 import "./WeatherDisplay.css"
+import WeatherCard from "../WeatherCard/WeatherCard";
 
 export default function WeatherDisplay({lat,long}){
     // the default useState will need to be set to the home location of the account ( I will work on this later )
@@ -49,7 +50,7 @@ export default function WeatherDisplay({lat,long}){
 
     useEffect(() => {
       fetchCurrentData()
-      fetchForecastedData()
+      fetchForcastedData()
     }, [lat,long]);
 
     const fetchCurrentData = async ()=>{
@@ -74,12 +75,8 @@ export default function WeatherDisplay({lat,long}){
           }
         }
     }
-<<<<<<< HEAD
 
     const fetchForcastedData = async () => {
-=======
-    const fetchForecastedData = async () => {
->>>>>>> 22398a10a01fd290e78ac2fe2b9359150bb2492d
         if (lat && long) {
           setIsLoading(true);
 
@@ -202,10 +199,10 @@ export default function WeatherDisplay({lat,long}){
           {/* look into mapping over the card component */}
           {/* the card component still needs to be made and imported for this to work!!! */}
 
-          {/* <CardComponet minMax={getTemperatureStats(day1)} averageHumidity={getAverageHumidity(day1)} weatherDescription={getMostCommonWeatherDescription(day1)} date={day1[0].data.dt_txt.split(" ")[0]}/>
-          <CardComponet minMax={getTemperatureStats(day2)} averageHumidity={getAverageHumidity(day2)} weatherDescription={getMostCommonWeatherDescription(day2)} date={day2[0].data.dt_txt.split(" ")[0]}/>
-          <CardComponet minMax={getTemperatureStats(day3)} averageHumidity={getAverageHumidity(day3)} weatherDescription={getMostCommonWeatherDescription(day3)} date={day3[0].data.dt_txt.split(" ")[0]}/>
-          <CardComponet minMax={getTemperatureStats(day4)} averageHumidity={getAverageHumidity(day4)} weatherDescription={getMostCommonWeatherDescription(day4)} date={day4[0].data.dt_txt.split(" ")[0]}/> */}
+          <WeatherCard minMax={getTemperatureStats(day1)} averageHumidity={getAverageHumidity(day1)} weatherDescription={getMostCommonWeatherDescription(day1)} date={day1[0].data.dt_txt.split(" ")[0]}/>
+          <WeatherCard minMax={getTemperatureStats(day2)} averageHumidity={getAverageHumidity(day2)} weatherDescription={getMostCommonWeatherDescription(day2)} date={day2[0].data.dt_txt.split(" ")[0]}/>
+          <WeatherCard minMax={getTemperatureStats(day3)} averageHumidity={getAverageHumidity(day3)} weatherDescription={getMostCommonWeatherDescription(day3)} date={day3[0].data.dt_txt.split(" ")[0]}/>
+          <WeatherCard minMax={getTemperatureStats(day4)} averageHumidity={getAverageHumidity(day4)} weatherDescription={getMostCommonWeatherDescription(day4)} date={day4[0].data.dt_txt.split(" ")[0]}/>
         
         </div>
     )
