@@ -5,6 +5,7 @@ from database.models import db, User
 from database.schemas import register_schema, user_schema
 from marshmallow import ValidationError
 from sqlalchemy.exc import IntegrityError
+from resources.email import send_reset_email
 import datetime
 
 
@@ -43,3 +44,39 @@ class LoginResource(Resource):
         }
         access_token = create_access_token(identity=str(user.id), additional_claims=additional_claims, expires_delta=expires)
         return {'access': access_token}, 200
+
+class ForgotPasswordResource(Resource):
+    """ Forgot Password, sends reset password email """
+    def post(self):
+        data = request.get_json()
+        email = data.get('email')
+
+        # Check if the email exists in the database
+        user = User.query.filter_by(email=email).first()
+
+        if not user:
+            return {"message": "Email not found"}, 404
+
+        send_reset_email(user)
+
+        return {"message": "Password reset email sent"}, 200
+
+class ResetResource(Resource):
+    """ Password Reset, reset user password """
+    def post(self, token):
+        form_data = request.get_json()
+        new_password = form_data.get('new_password')
+
+        # Find the user based on the reset token
+        user_email = User.verify_reset_token(token)
+        user = User.query.filter_by(email=user_email).first()
+
+        if not user:
+            return {"message": "Invalid token"}, 401
+
+        # Update the user's password with the new one and hash it
+        user.password = new_password
+        user.hash_password()
+        db.session.commit()
+
+        return {"message": "Password reset successful"}, 200
