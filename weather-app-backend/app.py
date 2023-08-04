@@ -31,6 +31,13 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('SQLALCHEMY_DATABASE_URI')
     app.config['JWT_SECRET_KEY'] = environ.get('JWT_SECRET_KEY')
 
+    # Flask-Mail configuration using environment variables
+    app.config['MAIL_SERVER'] = environ.get('MAIL_SERVER')
+    app.config['MAIL_PORT'] = int(environ.get('MAIL_PORT'))
+    app.config['MAIL_USE_TLS'] = environ.get('MAIL_USE_TLS') == 'True'
+    app.config['MAIL_USERNAME'] = environ.get('MAIL_USERNAME')
+    app.config['MAIL_PASSWORD'] = environ.get('MAIL_PASSWORD')
+
     # Registers all routes with API
     api = create_routes()
 
