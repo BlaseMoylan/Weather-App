@@ -11,7 +11,7 @@ import { Button } from "semantic-ui-react";
  * @returns {JSX.Element} WeatherCard component JSX.
  */
 
-const WeatherCard = ({ weatherData }) => {
+const WeatherCurrCard = ({ weatherData }) => {
   const refresh = () => {
     window.location.reload();
   };
@@ -92,4 +92,4 @@ const WeatherCard = ({ weatherData }) => {
   );
 };
 
-export default WeatherCard;
+export default WeatherCurrCard;
