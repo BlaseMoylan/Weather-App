@@ -9,6 +9,7 @@ from database.schemas import ma
 from resources.auth import LoginResource, RegisterResource
 from resources.location import Locations, IndividualLocation
 from dotenv import load_dotenv
+from flask_mail import Mail
 from os import environ
 
 # Adds variables from .env file to environment
@@ -19,6 +20,7 @@ bcrypt = Bcrypt()
 jwt= JWTManager()
 cors = CORS()
 migrate = Migrate()
+mail = Mail()
 
 def create_app():
     """
@@ -30,6 +32,7 @@ def create_app():
     # Loads config properties from .env file
     app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('SQLALCHEMY_DATABASE_URI')
     app.config['JWT_SECRET_KEY'] = environ.get('JWT_SECRET_KEY')
+    app.config['FRONTEND_URL'] = 'http://localhost:3000'
 
     # Flask-Mail configuration using environment variables
     app.config['MAIL_SERVER'] = environ.get('MAIL_SERVER')
@@ -49,6 +52,7 @@ def create_app():
     cors.init_app(app)
     api.init_app(app)
     migrate.init_app(app, db)
+    mail.init_app(app)
 
     return app
 
