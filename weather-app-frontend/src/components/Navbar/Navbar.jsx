@@ -1,9 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { SearchBox } from '@mapbox/search-js-react';
 
-import Authenticate from './Authentication/Authenticate';
 import AuthContext from '../../context/AuthContext';
-import Modal from '../Modal/Modal';
 import './Navbar.scss'
 
 const Navbar = ({setLong, setLat}) => {
@@ -36,12 +35,16 @@ const Navbar = ({setLong, setLat}) => {
                     <h1>MySkies</h1>
                 </div>
 
-                {user ? <button onClick={logoutUser}>{user.email}</button> : <button className='login-signup' onClick={()=>setShowLoginSignup(!showLoginSignup)}>login/sign-up</button>}
+                {user ?
+                    <button onClick={logoutUser}>{user.email}</button>
+                :
+                    <div>
+                        <Link className='login-signup' to={'/auth/login'}>login</Link>
+                        <Link className='login-signup' to={'/auth/register'}>sign-up</Link>
+                    </div>
+                }
 
             </nav>
-            <Modal close={()=>setShowLoginSignup(!showLoginSignup)} show={showLoginSignup}>
-                <Authenticate />
-            </Modal>
         </>
     );
 }

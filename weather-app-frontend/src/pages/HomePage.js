@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Dimmer, Loader } from 'semantic-ui-react';
 import axios from 'axios';
 import Navbar from '../components/Navbar/Navbar';
-import WeatherDisplay from '../components/WeatherDisplay/WeatherDisplay';
-import WeatherCard from '../components/WeatherCard/WeatherCard';
+// import WeatherDisplay from '../components/WeatherDisplay/WeatherDisplay';
+// import WeatherCard from '../components/WeatherCard/WeatherCard';
 
 const HomePage = () => {
 
@@ -68,8 +68,8 @@ const HomePage = () => {
                 <div>
                 <Navbar setLong={setLong} setLat={setLat} />
                 <main>
-                    <WeatherDisplay lat={lat} long={long} />
-                    <WeatherCard weatherData={data} />
+                    {/* <WeatherDisplay lat={lat} long={long} />
+                    <WeatherCard weatherData={data} /> */}
                 </main>
                 </div>
             )}

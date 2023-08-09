@@ -13,6 +13,12 @@ export default function App() {
     <div className='app'>
       <Routes>
         <Route path='/home' element={<HomePage />} />
+        <Route path='/auth'>
+          <Route path='/login' />
+          <Route path='/register' />
+          <Route path='/forgotpassword' />
+          <Route path='/resetpassword /:resetCode' />
+        </Route>
         <Route path="/*" element={<Navigate to="/home" replace={true}/>} />
       </Routes>
     </div>
