@@ -1,5 +1,10 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
+
+
 import HomePage from './pages/HomePage';
+
+import Login from './components/Login/Login';
+import Register from './components/Register/Register';
 import './App.scss';
 
 /**
@@ -14,8 +19,8 @@ export default function App() {
       <Routes>
         <Route path='/home' element={<HomePage />} />
         <Route path='/auth'>
-          <Route path='/login' />
-          <Route path='/register' />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
           <Route path='/forgotpassword' />
           <Route path='/resetpassword /:resetCode' />
         </Route>
