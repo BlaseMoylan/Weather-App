@@ -39,8 +39,8 @@ const Navbar = ({setLong, setLat}) => {
                     <button onClick={logoutUser}>{user.email}</button>
                 :
                     <div>
-                        <Link className='login-signup' to={'/auth/login'}>login</Link>
-                        <Link className='login-signup' to={'/auth/register'}>sign-up</Link>
+                        <Link className='login-signup' to={'/login'}>login</Link>
+                        <Link className='login-signup' to={'/register'}>sign-up</Link>
                     </div>
                 }
 

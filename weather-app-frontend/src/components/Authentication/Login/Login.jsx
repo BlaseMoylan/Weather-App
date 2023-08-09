@@ -1,10 +1,12 @@
 import { useContext, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
-import AuthContext from '../../../../context/AuthContext';
-import useCustomForm from '../../../../hooks/useCustomForm';
-import './Login.scss'
+import AuthContext from '../../../context/AuthContext';
+import useCustomForm from '../../../hooks/useCustomForm';
+import '../Authenticate.scss';
+import './Login.scss';
 
-const Login = ({signup}) => {
+const Login = () => {
 
     const emailRef = useRef()
 
@@ -47,8 +49,8 @@ const Login = ({signup}) => {
             </div>
 
             <div className='login-btn-area'>
-                <button className='forgot-password'>Forgot Password</button>
-                <button onClick={signup}>Sign-up</button>
+                <Link className='forgot-password' to={'/forgotpassword'}>Forgot Password</Link>
+                <Link to={'/register'}>Sign-up</Link>
             </div>
 
             <input type='submit' />

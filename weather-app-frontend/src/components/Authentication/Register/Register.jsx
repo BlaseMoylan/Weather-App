@@ -1,14 +1,16 @@
 import { useContext, useRef, useState, useEffect } from 'react';
 import { faCheck, faTimes,faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Link } from 'react-router-dom';
 
-import AuthContext from '../../../../context/AuthContext';
+import AuthContext from '../../../context/AuthContext';
+import '../Authenticate.scss';
 import './Register.scss'
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 const PWD_REGEX = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%-]).{8,24}$/
 
-const Register = ({login}) => {
+const Register = () => {
 
     const { registerUser } = useContext(AuthContext)
 
@@ -211,7 +213,7 @@ const Register = ({login}) => {
 
             <p className='sign-in'>
                 Already registered?<br/>
-                <button onClick={login}>Sign In</button>
+                <Link to={'/login'}>Sign In</Link>
             </p>
         </form>
     );

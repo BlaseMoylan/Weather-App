@@ -3,8 +3,8 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 
 import HomePage from './pages/HomePage';
 
-import Login from './components/Login/Login';
-import Register from './components/Register/Register';
+import Login from './components/Authentication/Login/Login';
+import Register from './components/Authentication/Register/Register';
 import './App.scss';
 
 /**
@@ -18,12 +18,10 @@ export default function App() {
     <div className='app'>
       <Routes>
         <Route path='/home' element={<HomePage />} />
-        <Route path='/auth'>
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/forgotpassword' />
-          <Route path='/resetpassword /:resetCode' />
-        </Route>
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/forgotpassword' />
+        <Route path='/resetpassword/:resetCode' />
         <Route path="/*" element={<Navigate to="/home" replace={true}/>} />
       </Routes>
     </div>
