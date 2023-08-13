@@ -66,7 +66,7 @@ def create_routes():
     api.add_resource(Locations, '/api/locations')
     api.add_resource(IndividualLocation, '/api/location/<int:location_id>')
     api.add_resource(ForgotPasswordResource, '/api/auth/forgot_password')
-    api.add_resource(ResetResource, '/api/auth/reset_password/<string:token>')
+    api.add_resource(ResetResource, '/api/auth/reset_password')
 
     return api
 

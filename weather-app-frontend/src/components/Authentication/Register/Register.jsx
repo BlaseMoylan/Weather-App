@@ -74,148 +74,150 @@ const Register = () => {
     }
 
     return (
-        <form className={'authenticate'} onSubmit={handleSubmit}>
+        <div className='authenticate' >
+            <form className={'authentication-form'} onSubmit={handleSubmit}>
 
-            <h2>Sign-up</h2>
+                <h2>Sign-up</h2>
 
-            <p ref={errRef} className={errMsg ? 'errMsg' : 'offscreen'} aria-live='assertive'>
-                {errMsg}
-            </p>
+                <p ref={errRef} className={errMsg ? 'errMsg' : 'offscreen'} aria-live='assertive'>
+                    {errMsg}
+                </p>
 
-            <div className='form-group'>
-                <label htmlFor='email'>
-                    Email
+                <div className='form-group'>
+                    <label htmlFor='email'>
+                        Email
 
-                    <span className={validEmail ? 'valid' : 'hide'}>
-                        <FontAwesomeIcon icon={faCheck} className='check'/>
-                    </span>
+                        <span className={validEmail ? 'valid' : 'hide'}>
+                            <FontAwesomeIcon icon={faCheck} className='check'/>
+                        </span>
 
-                    <span className={validEmail || !email ? 'hide' : 'invalid'}>
-                        <FontAwesomeIcon icon={faTimes} className='wrong'/>
-                    </span>
-                </label>
+                        <span className={validEmail || !email ? 'hide' : 'invalid'}>
+                            <FontAwesomeIcon icon={faTimes} className='wrong'/>
+                        </span>
+                    </label>
 
-                <input
-                    type='email'
-                    id='email'
-                    ref={emailRef}
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    onFocus={() => setEmailFocus(true)}
-                    onBlur={() => setEmailFocus(false)}
-                    aria-invalid={validEmail ? 'false' : 'true'}
-                    aria-describedby='email_note'
-                    autoComplete='off'
-                    required
-                />
+                    <input
+                        type='email'
+                        id='email'
+                        ref={emailRef}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        onFocus={() => setEmailFocus(true)}
+                        onBlur={() => setEmailFocus(false)}
+                        aria-invalid={validEmail ? 'false' : 'true'}
+                        aria-describedby='email_note'
+                        autoComplete='off'
+                        required
+                    />
 
-                <div id='email_note' className={emailFocus && email && !validEmail ? 'instructions' : 'offscreen'}>
-                    <FontAwesomeIcon icon={faInfoCircle} className='info-icon'/>
-                    <p>
-                        <span aria-label='Your Email'>YourEmail</span>
-                        <span aria-label='at symbol'>@</span>
-                        Example
-                        <span aria-label='dot'>.</span>
-                        com
-                    </p>
+                    <div id='email_note' className={emailFocus && email && !validEmail ? 'instructions' : 'offscreen'}>
+                        <FontAwesomeIcon icon={faInfoCircle} className='info-icon'/>
+                        <p>
+                            <span aria-label='Your Email'>YourEmail</span>
+                            <span aria-label='at symbol'>@</span>
+                            Example
+                            <span aria-label='dot'>.</span>
+                            com
+                        </p>
+                    </div>
                 </div>
-            </div>
 
-            <div className='form-group'>
-                <label htmlFor='password'>
-                    Password
+                <div className='form-group'>
+                    <label htmlFor='password'>
+                        Password
 
-                    <span className={validPwd ? 'valid' : 'hide'}>
-                        <FontAwesomeIcon icon={faCheck} className='check'/>
-                    </span>
+                        <span className={validPwd ? 'valid' : 'hide'}>
+                            <FontAwesomeIcon icon={faCheck} className='check'/>
+                        </span>
 
-                    <span className={validPwd || !pwd ? 'hide' : 'invalid'}>
-                        <FontAwesomeIcon icon={faTimes} className='wrong'/>
-                    </span>
-                </label>
+                        <span className={validPwd || !pwd ? 'hide' : 'invalid'}>
+                            <FontAwesomeIcon icon={faTimes} className='wrong'/>
+                        </span>
+                    </label>
 
-                <input
-                    type='password'
-                    id='password'
-                    value={pwd}
-                    onChange={(e) => setPwd(e.target.value)}
-                    onFocus={() => setPwdFocus(true)}
-                    onBlur={() => setPwdFocus(false)}
-                    aria-invalid={validPwd ? 'false' : 'true'}
-                    aria-describedby='pwd_note'
-                    required
-                />
+                    <input
+                        type='password'
+                        id='password'
+                        value={pwd}
+                        onChange={(e) => setPwd(e.target.value)}
+                        onFocus={() => setPwdFocus(true)}
+                        onBlur={() => setPwdFocus(false)}
+                        aria-invalid={validPwd ? 'false' : 'true'}
+                        aria-describedby='pwd_note'
+                        required
+                    />
 
-                <div id='pwd_note' className={pwdFocus && !validPwd ? 'instructions' : 'offscreen'}>
-                    <FontAwesomeIcon icon={faInfoCircle} className='info-icon'/>
-                    <p>Password must be:</p>
+                    <div id='pwd_note' className={pwdFocus && !validPwd ? 'instructions' : 'offscreen'}>
+                        <FontAwesomeIcon icon={faInfoCircle} className='info-icon'/>
+                        <p>Password must be:</p>
 
-                    <ul>
-                        <li>Between 8 to 24 characters</li>
-                        <li>At least 1 letter</li>
-                        <li>At least 1 number</li>
-                        <li>
-                            At least 1 special character:
-                                <span aria-label='exclamation mark'>!</span>
-                                <span aria-label='at symbol'>@</span>
-                                <span aria-label='hashtag'>#</span>
-                                <span aria-label='dollar sign'>$</span>
-                                <span aria-label='percent'>%</span>
-                                <span aria-label='hyphen'>-</span>
-                        </li>
-                    </ul>
+                        <ul>
+                            <li>Between 8 to 24 characters</li>
+                            <li>At least 1 letter</li>
+                            <li>At least 1 number</li>
+                            <li>
+                                At least 1 special character:
+                                    <span aria-label='exclamation mark'>!</span>
+                                    <span aria-label='at symbol'>@</span>
+                                    <span aria-label='hashtag'>#</span>
+                                    <span aria-label='dollar sign'>$</span>
+                                    <span aria-label='percent'>%</span>
+                                    <span aria-label='hyphen'>-</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
 
-            <div className='form-group'>
-                <label htmlFor='confirm_password'>
-                    Confirm Password
+                <div className='form-group'>
+                    <label htmlFor='confirm_password'>
+                        Confirm Password
 
-                    <span className={validMatch && matchPwd ? 'valid' : 'hide'}>
-                        <FontAwesomeIcon icon={faCheck} className='check'/>
-                    </span>
+                        <span className={validMatch && matchPwd ? 'valid' : 'hide'}>
+                            <FontAwesomeIcon icon={faCheck} className='check'/>
+                        </span>
 
-                    <span className={validMatch || !matchPwd ? 'hide' : 'invalid'}>
-                        <FontAwesomeIcon icon={faTimes}  className='wrong'/>
-                    </span>
-                </label>
+                        <span className={validMatch || !matchPwd ? 'hide' : 'invalid'}>
+                            <FontAwesomeIcon icon={faTimes}  className='wrong'/>
+                        </span>
+                    </label>
 
-                <input
-                    type='password'
-                    id='confirm_Password'
-                    value={matchPwd}
-                    onChange={(e) => setMatchPwd(e.target.value)}
-                    onFocus={() => setMatchFocus(true)}
-                    onBlur={() => setMatchFocus(false)}
-                    aria-invalid={validMatch ? 'false' : 'true'}
-                    aria-describedby='confirm_note'
-                    required
-                />
+                    <input
+                        type='password'
+                        id='confirm_Password'
+                        value={matchPwd}
+                        onChange={(e) => setMatchPwd(e.target.value)}
+                        onFocus={() => setMatchFocus(true)}
+                        onBlur={() => setMatchFocus(false)}
+                        aria-invalid={validMatch ? 'false' : 'true'}
+                        aria-describedby='confirm_note'
+                        required
+                    />
 
-                <div id='confirm_note' className={matchFocus && !validMatch ? 'instructions' : 'offscreen'}>
-                    <FontAwesomeIcon icon={faInfoCircle} className='info-icon'/>
-                    <p>Must match password</p>
+                    <div id='confirm_note' className={matchFocus && !validMatch ? 'instructions' : 'offscreen'}>
+                        <FontAwesomeIcon icon={faInfoCircle} className='info-icon'/>
+                        <p>Must match password</p>
+                    </div>
                 </div>
-            </div>
 
-            <div className='form-group'>
-                <label>Phone Number (optional)</label>
-                <input
-                    type='tel'
-                    id='phone_number'
-                    value={phoneNumber}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
-                    autoComplete='off'
-                />
-            </div>
+                <div className='form-group'>
+                    <label>Phone Number (optional)</label>
+                    <input
+                        type='tel'
+                        id='phone_number'
+                        value={phoneNumber}
+                        onChange={(e) => setPhoneNumber(e.target.value)}
+                        autoComplete='off'
+                    />
+                </div>
 
-            <input type='submit' disabled={!validEmail || !validPwd || !validMatch ? true : false}/>
+                <input type='submit' disabled={!validEmail || !validPwd || !validMatch ? true : false}/>
 
-            <p className='sign-in'>
-                Already registered?<br/>
-                <Link to={'/login'}>Sign In</Link>
-            </p>
-        </form>
+                <p className='sign-in'>
+                    Already registered?<br/>
+                    <Link to={'/login'}>Sign In</Link>
+                </p>
+            </form>
+        </div>
     );
 }
 

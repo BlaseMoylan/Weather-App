@@ -63,9 +63,10 @@ class ForgotPasswordResource(Resource):
 
 class ResetResource(Resource):
     """ Password Reset, reset user password """
-    def post(self, token):
+    def post(self):
         form_data = request.get_json()
         new_password = form_data.get('new_password')
+        token = form_data.get('token')
 
         # Find the user based on the reset token
         user_email = User.verify_reset_token(token)

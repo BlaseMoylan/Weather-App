@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';
 
 import Login from './components/Authentication/Login/Login';
 import Register from './components/Authentication/Register/Register';
+import ForgotPassword from './components/Authentication/ForgotPassword/ForgotPassword';
 import './App.scss';
 
 /**
@@ -20,7 +21,7 @@ export default function App() {
         <Route path='/home' element={<HomePage />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
-        <Route path='/forgotpassword' />
+        <Route path='/forgotpassword' element={ <ForgotPassword/> } />
         <Route path='/resetpassword/:resetCode' />
         <Route path="/*" element={<Navigate to="/home" replace={true}/>} />
       </Routes>

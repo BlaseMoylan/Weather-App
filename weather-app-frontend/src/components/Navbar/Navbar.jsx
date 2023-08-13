@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { SearchBox } from '@mapbox/search-js-react';
 
@@ -9,11 +9,6 @@ const Navbar = ({setLong, setLat}) => {
 
     const {user, logoutUser} = useContext(AuthContext)
     const [value, setValue] = useState('');
-    const [showLoginSignup, setShowLoginSignup] = useState(false);
-
-    useEffect(() => {
-        setShowLoginSignup(false)
-    }, [user]);
 
     //sets the new Longitude and Latitude
     function chosenLocation(data){

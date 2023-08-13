@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import jwtDecode from "jwt-decode";
 
@@ -26,6 +27,7 @@ export const AuthProvider = ({children}) => {
 
     const [token, setToken] = useState(userToken)
     const [user, setUser] = useState(setUserObject(decodedUser))
+    const navigate = useNavigate()
 
     const [isServerError, setIsServerError] = useState(false)
 
@@ -59,7 +61,7 @@ export const AuthProvider = ({children}) => {
 
     const loginUser = async (loginData) => {
         try{
-            let response = await axios.post(`${baseUrl}/auth/login`, loginData);
+            let response = await axios.post(`${baseUrl}/auth/login`, loginData)
 
             if(response.status === 200){
                 localStorage.setItem('token', JSON.stringify(response.data.access))
@@ -85,12 +87,32 @@ export const AuthProvider = ({children}) => {
         }
     }
 
+    const forgotPassword = async (forgotPasswordData) => {
+        try{
+            let response = await axios.post(`${baseUrl}/auth/forgot_password`, forgotPasswordData)
+            return response.data
+        }catch(error){
+            console.log(error)
+        }
+    }
+
+    const resetUserPassword = async (resetData) => {
+        try{
+            let response = await axios.post(`${baseUrl}/auth/reset_password`, resetData)
+            return response.data
+        }catch(error){
+            console.log(error)
+        }
+    }
+
     const authContextData = {
         user,
         token,
         loginUser,
         logoutUser,
         registerUser,
+        forgotPassword,
+        resetUserPassword,
         isServerError
     }
 
