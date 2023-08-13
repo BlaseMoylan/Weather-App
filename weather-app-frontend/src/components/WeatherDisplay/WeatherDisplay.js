@@ -23,6 +23,7 @@ import React from "react";
 import axios from "axios";
 import "./WeatherDisplay.css"
 import WeatherCard from "../WeatherCard/WeatherCard";
+import WeatherCurrCard from "../WeatherCard/WeatherCurrCard";
 
 export default function WeatherDisplay({lat,long}){
     // the default useState will need to be set to the home location of the account ( I will work on this later )
@@ -192,18 +193,18 @@ export default function WeatherDisplay({lat,long}){
     }
 
     return (
-      // need to munipulate data from the day states and send the max and min temp,average humidity, and weather discription down to the weather card component
-      // also need to pass down the date
-        <div>
-          WeatherDisplay
+        <div className="mainDisplay">
+          <div className="today">
+            <WeatherCurrCard data={todayData}/>
+          </div>
+          <div className="forecasted">  
           {/* look into mapping over the card component */}
           {/* the card component still needs to be made and imported for this to work!!! */}
-
-          <WeatherCard minMax={getTemperatureStats(day1)} averageHumidity={getAverageHumidity(day1)} weatherDescription={getMostCommonWeatherDescription(day1)} date={day1[0].data.dt_txt.split(" ")[0]}/>
-          <WeatherCard minMax={getTemperatureStats(day2)} averageHumidity={getAverageHumidity(day2)} weatherDescription={getMostCommonWeatherDescription(day2)} date={day2[0].data.dt_txt.split(" ")[0]}/>
-          <WeatherCard minMax={getTemperatureStats(day3)} averageHumidity={getAverageHumidity(day3)} weatherDescription={getMostCommonWeatherDescription(day3)} date={day3[0].data.dt_txt.split(" ")[0]}/>
-          <WeatherCard minMax={getTemperatureStats(day4)} averageHumidity={getAverageHumidity(day4)} weatherDescription={getMostCommonWeatherDescription(day4)} date={day4[0].data.dt_txt.split(" ")[0]}/>
-        
+            <WeatherCard minMax={getTemperatureStats(day1)} averageHumidity={getAverageHumidity(day1)} weatherDescription={getMostCommonWeatherDescription(day1)} date={day1[0].data.dt_txt.split(" ")[0]}/>
+            <WeatherCard minMax={getTemperatureStats(day2)} averageHumidity={getAverageHumidity(day2)} weatherDescription={getMostCommonWeatherDescription(day2)} date={day2[0].data.dt_txt.split(" ")[0]}/>
+            <WeatherCard minMax={getTemperatureStats(day3)} averageHumidity={getAverageHumidity(day3)} weatherDescription={getMostCommonWeatherDescription(day3)} date={day3[0].data.dt_txt.split(" ")[0]}/>
+            <WeatherCard minMax={getTemperatureStats(day4)} averageHumidity={getAverageHumidity(day4)} weatherDescription={getMostCommonWeatherDescription(day4)} date={day4[0].data.dt_txt.split(" ")[0]}/>
+          </div>
         </div>
     )
 }
