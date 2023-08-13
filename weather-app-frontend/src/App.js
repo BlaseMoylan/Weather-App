@@ -19,9 +19,9 @@ export default function App() {
   return (
     <div className='app'>
       <Routes>
-        <Route path='/home' element={<HomePage />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
+        <Route path='/home' element={<HomePage/>} />
+        <Route path='/login' element={<Login/>} />
+        <Route path='/register' element={<Register/>} />
         <Route path='/forgotpassword' element={<ForgotPassword/>} />
         <Route path='/resetpassword/:resetCode' element={<ResetPassword/>} />
         <Route path="/*" element={<Navigate to="/home" replace={true}/>} />
