@@ -1,10 +1,18 @@
-.background{
-    
+.mainDisplay{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .today{
-
+    height: 30%;
+    background-color: transparent;
 }
 .forecasted{
-
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: transparent;
 }
