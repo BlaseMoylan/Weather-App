@@ -193,7 +193,7 @@ export default function WeatherDisplay({lat,long}){
     }
 
     return (
-        <div>
+        <div className="background">
           <div className="today">
             <WeatherCurrCard data={todayData}/>
           </div>
