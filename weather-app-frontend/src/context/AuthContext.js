@@ -90,7 +90,7 @@ export const AuthProvider = ({children}) => {
     const forgotPassword = async (forgotPasswordData) => {
         try{
             let response = await axios.post(`${baseUrl}/auth/forgot_password`, forgotPasswordData)
-            return response.data
+            console.log(response.data)
         }catch(error){
             console.log(error)
         }
@@ -99,7 +99,7 @@ export const AuthProvider = ({children}) => {
     const resetUserPassword = async (resetData) => {
         try{
             let response = await axios.post(`${baseUrl}/auth/reset_password`, resetData)
-            return response.data
+            console.log(response.data)
         }catch(error){
             console.log(error)
         }

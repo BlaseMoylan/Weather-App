@@ -27,7 +27,7 @@ class User(db.Model):
     @staticmethod
     def verify_reset_token(token):
         try:
-            email = jwt.decode(token, key=current_app.config.get('JWT_SECRET_KEY'))['reset_password_for']
+            email = jwt.decode(token, key=current_app.config.get('JWT_SECRET_KEY'), algorithms=['HS256'])['reset_password_for']
             return email
         except Exception as e:
             print(e)

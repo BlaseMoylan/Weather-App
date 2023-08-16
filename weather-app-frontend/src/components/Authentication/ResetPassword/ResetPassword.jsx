@@ -1,9 +1,22 @@
-import { useState, useRef, useEffect } from 'react';
-import 'ResetPassword.scss'
+import { useState, useRef, useEffect, useContext } from 'react';
+import { faCheck, faTimes,faInfoCircle } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useParams } from 'react-router-dom';
+
+import AuthContext from '../../../context/AuthContext';
+import '../Register/Register.scss'
+
+const PWD_REGEX = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%-]).{8,24}$/
 
 const ResetPassword = () => {
 
+    const { resetUserPassword } = useContext(AuthContext)
+    const { resetCode } = useParams()
+
     const pwdRef = useRef()
+    const errRef = useRef()
+
+    const [errMsg, setErrMsg] = useState('');
 
     const [pwd, setPwd] = useState('');
     const [validPwd, setValidPwd] = useState(false);
@@ -14,16 +27,44 @@ const ResetPassword = () => {
     const [matchFocus, setMatchFocus] = useState(false);
 
     useEffect(() => {
-        pwd.current.focus()
+        pwdRef.current.focus()
     }, []);
+
+    useEffect(() => {
+        setValidPwd(PWD_REGEX.test(pwd))
+        setValidMatch(pwd === matchPwd)
+    }, [pwd, matchPwd]);
+
+    useEffect(() => {
+        setErrMsg('')
+    }, [pwd, matchPwd]);
 
     const handleSubmit = async(e) => {
         e.preventDefault()
+
+        if(!PWD_REGEX.test(pwd)){
+            setErrMsg('Invalid Entry')
+            errRef.current.focus()
+            return
+        }
+
+        resetUserPassword({
+            new_password: pwd,
+            token: resetCode
+        })
+
     }
 
     return (
         <div className='authenticate'>
             <form className='authentication-form' onSubmit={handleSubmit} >
+
+                <h2>Password Reset</h2>
+
+                <p ref={errRef} className={errMsg ? 'errMsg' : 'offscreen'} aria-live='assertive'>
+                    {errMsg}
+                </p>
+
                 <div className='form-group'>
                     <label htmlFor='password'>
                         Password
@@ -41,6 +82,7 @@ const ResetPassword = () => {
                         type='password'
                         id='password'
                         value={pwd}
+                        ref={pwdRef}
                         onChange={(e) => setPwd(e.target.value)}
                         onFocus={() => setPwdFocus(true)}
                         onBlur={() => setPwdFocus(false)}

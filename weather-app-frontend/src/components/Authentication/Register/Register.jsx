@@ -62,6 +62,7 @@ const Register = () => {
         const v2 = PWD_REGEX.test(pwd)
         if(!v1 || !v2){
             setErrMsg('Invalid Entry')
+            errRef.current.focus()
             return
         }
 
