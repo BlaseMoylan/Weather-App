@@ -6,19 +6,21 @@ import { useState, useEffect } from "react";
 import React from "react";
 import axios from "axios";
 import "./WeatherDisplay.css";
-import WeatherCard from "../WeatherCard/WeatherCard";
-import WeatherCurrCard from "../WeatherCard/WeatherCurrCard";
+import WeatherCard from "../WeatherCard/WeatherCard"; // Import WeatherCard component
+import WeatherCurrCard from "../WeatherCard/WeatherCurrCard"; // Import WeatherCurrCard component
 
 export default function WeatherDisplay({ lat, long }) {
-    const [todayData, setTodayData]= useState(null);
+    const [todayData, setTodayData] = useState(null);
     const [forecastData, setForecastData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [currDay, setCurrDay] = useState([]);
     const [day1, setDay1] = useState();
     const [day2, setDay2] = useState();
     const [day3, setDay3] = useState();
     const [day4, setDay4] = useState();
 
     useEffect(() => {
+        // Fetch current weather data and forecasted data when latitude and longitude change
         fetchCurrentData();
         fetchForecastedData();
     }, [lat, long]);
@@ -26,6 +28,11 @@ export default function WeatherDisplay({ lat, long }) {
     const fetchCurrentData = async () => {
         if (lat && long) {
             try {
+                // Fetch current weather data using OpenWeatherMap API
+                // this gets the next 5 days current day not included
+            // this gives a forecast for every three hours each day - 8 hours forecasted each day
+                    // so every 9th item in the list is the start of a new day
+                // need to consolidate this data and get the overall max and min for each day
                 const response = await axios.get(
                     `${process.env.REACT_APP_API_URL}/weather/?lat=${lat}&lon=${long}&units=imperial&APPID=${process.env.REACT_APP_API_KEY}`
                 );
@@ -43,6 +50,7 @@ export default function WeatherDisplay({ lat, long }) {
             setIsLoading(true);
 
             try {
+                // Fetch forecasted weather data for the next 5 days using OpenWeatherMap API
                 const response = await axios.get(
                     `${process.env.REACT_APP_API_URL}/forecast?lat=${lat}&lon=${long}&units=imperial&APPID=${process.env.REACT_APP_API_KEY}`
                 );
@@ -50,9 +58,10 @@ export default function WeatherDisplay({ lat, long }) {
                 const result = response.data;
                 setForecastData(result.list);
 
+                // Simulate a delay for demonstration purposes
                 setTimeout(() => {
                     setIsLoading(false);
-                }, 1000); // Simulating a delay for demonstration purposes
+                }, 1000);
             } catch (error) {
                 console.error('Error fetching weather data:', error);
                 setIsLoading(false);
@@ -66,6 +75,7 @@ export default function WeatherDisplay({ lat, long }) {
 
     useEffect(() => {
         if (forecastData !== null) {
+            // Group forecasted data by day
             const groupedDataByDay = forecastData.reduce((result, item) => {
                 const day = getDate(item.dt_txt);
                 if (!result[day]) {
@@ -86,6 +96,7 @@ export default function WeatherDisplay({ lat, long }) {
     }, [forecastData]);
 
     function getTemperatureStats(weatherData) {
+        // Calculate minimum and maximum temperatures from forecasted data
         return weatherData.reduce(
             (acc, curr) => {
                 const minTemp = curr.main.temp_min;
@@ -113,6 +124,7 @@ export default function WeatherDisplay({ lat, long }) {
             return 0;
         }
 
+        // Calculate average humidity from forecasted data
         const totalHumidity = weatherData.reduce((sum, data) => sum + data.main.humidity, 0);
         const averageHumidity = totalHumidity / weatherData.length;
         return averageHumidity;
@@ -123,6 +135,7 @@ export default function WeatherDisplay({ lat, long }) {
             return "No Data available";
         }
 
+        // Find the most common weather description from forecasted data
         const weatherDescriptionCounts = weatherData.reduce((counts, data) => {
             const description = data.weather[0].description;
             counts[description] = (counts[description] || 0) + 1;
@@ -145,9 +158,11 @@ export default function WeatherDisplay({ lat, long }) {
     return (
         <div className="mainDisplay">
             <div className="today">
+                {/* Display current weather card */}
                 <WeatherCurrCard data={todayData} />
             </div>
             <div className="forecasted">
+                {/* Display forecasted weather cards */}
                 {/* look into mapping over the card component */}
                 {/* the card component still needs to be made and imported for this to work!!! */}
                 <WeatherCard minMax={getTemperatureStats(day1)} averageHumidity={getAverageHumidity(day1)} weatherDescription={getMostCommonWeatherDescription(day1)} date={day1[0].dt_txt.split(" ")[0]} />
@@ -159,7 +174,3 @@ export default function WeatherDisplay({ lat, long }) {
     );
 }
 
-// this gets the next 5 days current day not included
-            // this gives a forecast for every three hours each day - 8 hours forecasted each day
-                    // so every 9th item in the list is the start of a new day
-                // need to consolidate this data and get the overall max and min for each day
