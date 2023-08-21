@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { SearchBox } from '@mapbox/search-js-react';
+import { useNavigate } from 'react-router-dom';
 
 import AuthContext from '../../context/AuthContext';
 import './Navbar.scss'
@@ -9,6 +10,7 @@ const Navbar = ({setLong, setLat}) => {
 
     const {user, logoutUser} = useContext(AuthContext)
     const [value, setValue] = useState('');
+    const navigate = useNavigate()
 
     //sets the new Longitude and Latitude
     function chosenLocation(data){
@@ -16,6 +18,7 @@ const Navbar = ({setLong, setLat}) => {
         setValue(data.features[0].properties.name)
         setLong(long)
         setLat(lat)
+        navigate('/home')
     }
 
     return (
@@ -27,7 +30,9 @@ const Navbar = ({setLong, setLat}) => {
                 </div>
 
                 <div>
-                    <h1>MySkies</h1>
+                    <Link to={'/home'}>
+                        <h1>MySkies</h1>
+                    </Link>
                 </div>
 
                 {user ?
