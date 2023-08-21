@@ -38,6 +38,8 @@ export default function WeatherDisplay({ lat, long }) {
                 );
 
                 const result = response.data;
+                console.log("$$$$$$$")
+                console.log(response.data)
                 setTodayData(result);
             } catch (error) {
                 console.error('Error fetching weather data:', error);
