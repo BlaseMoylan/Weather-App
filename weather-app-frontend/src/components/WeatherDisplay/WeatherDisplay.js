@@ -6,8 +6,8 @@ import { useState, useEffect } from "react";
 import React from "react";
 import axios from "axios";
 import "./WeatherDisplay.css"
-import WeatherCard from "../WeatherCard/WeatherCard";
-import WeatherCurrCard from "../WeatherCard/WeatherCurrCard";
+import WeatherCurrCard from "../WeatherCard/WeatherCurrCard"
+import WeatherFutureCard from "../WeatherCard/WeatherFutureCard"
 
 export default function WeatherDisplay({ lat, long }) {
     const [todayData, setTodayData] = useState(null);
@@ -166,10 +166,10 @@ export default function WeatherDisplay({ lat, long }) {
                 {/* Display forecasted weather cards */}
                 {/* look into mapping over the card component */}
                 {/* the card component still needs to be made and imported for this to work!!!! */}
-                <WeatherCard minMax={getTemperatureStats(day1)} averageHumidity={getAverageHumidity(day1)} weatherDescription={getMostCommonWeatherDescription(day1)} date={day1[0].dt_txt.split(" ")[0]} />
-                <WeatherCard minMax={getTemperatureStats(day2)} averageHumidity={getAverageHumidity(day2)} weatherDescription={getMostCommonWeatherDescription(day2)} date={day2[0].dt_txt.split(" ")[0]} />
-                <WeatherCard minMax={getTemperatureStats(day3)} averageHumidity={getAverageHumidity(day3)} weatherDescription={getMostCommonWeatherDescription(day3)} date={day3[0].dt_txt.split(" ")[0]} />
-                <WeatherCard minMax={getTemperatureStats(day4)} averageHumidity={getAverageHumidity(day4)} weatherDescription={getMostCommonWeatherDescription(day4)} date={day4[0].dt_txt.split(" ")[0]} />
+                {/* <WeatherFutureCard minMax={getTemperatureStats(day1)} averageHumidity={getAverageHumidity(day1)} weatherDescription={getMostCommonWeatherDescription(day1)} date={day1[0].dt_txt.split(" ")[0]} />
+                <WeatherFutureCard minMax={getTemperatureStats(day2)} averageHumidity={getAverageHumidity(day2)} weatherDescription={getMostCommonWeatherDescription(day2)} date={day2[0].dt_txt.split(" ")[0]} />
+                <WeatherFutureCard minMax={getTemperatureStats(day3)} averageHumidity={getAverageHumidity(day3)} weatherDescription={getMostCommonWeatherDescription(day3)} date={day3[0].dt_txt.split(" ")[0]} />
+                <WeatherFutureCard minMax={getTemperatureStats(day4)} averageHumidity={getAverageHumidity(day4)} weatherDescription={getMostCommonWeatherDescription(day4)} date={day4[0].dt_txt.split(" ")[0]} /> */}
             </div>
         </div>
     );
