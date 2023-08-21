@@ -22,7 +22,6 @@ import { useState, useEffect } from "react";
 import React from "react";
 import axios from "axios";
 import "./WeatherDisplay.css"
-import WeatherCard from "../WeatherCard/WeatherCard";
 import WeatherCurrCard from "../WeatherCard/WeatherCurrCard";
 
 export default function WeatherDisplay({lat,long}){
@@ -156,7 +155,7 @@ export default function WeatherDisplay({lat,long}){
           maxTemp:-Infinity,
         }
       )
-        
+
     }
 
     function getAverageHumidity(weatherData){
@@ -197,7 +196,7 @@ export default function WeatherDisplay({lat,long}){
           <div className="today">
             <WeatherCurrCard data={todayData}/>
           </div>
-          <div className="forecasted">  
+          <div className="forecasted">
           {/* look into mapping over the card component */}
           {/* the card component still needs to be made and imported for this to work!!! */}
             <WeatherCard minMax={getTemperatureStats(day1)} averageHumidity={getAverageHumidity(day1)} weatherDescription={getMostCommonWeatherDescription(day1)} date={day1[0].data.dt_txt.split(" ")[0]}/>
