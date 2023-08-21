@@ -5,9 +5,9 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import axios from "axios";
-import "./WeatherDisplay.css";
-import WeatherCard from "../WeatherCard/WeatherCard"; // Import WeatherCard component
-import WeatherCurrCard from "../WeatherCard/WeatherCurrCard"; // Import WeatherCurrCard component
+import "./WeatherDisplay.css"
+import WeatherCard from "../WeatherCard/WeatherCard";
+import WeatherCurrCard from "../WeatherCard/WeatherCurrCard";
 
 export default function WeatherDisplay({ lat, long }) {
     const [todayData, setTodayData] = useState(null);
@@ -110,13 +110,14 @@ export default function WeatherDisplay({ lat, long }) {
                     acc.maxTemp = maxTemp;
                 }
 
-                return acc;
-            },
-            {
-                minTemp: Infinity,
-                maxTemp: -Infinity,
-            }
-        );
+          return acc;
+        },
+        {
+          minTemp:Infinity,
+          maxTemp:-Infinity,
+        }
+      )
+
     }
 
     function getAverageHumidity(weatherData) {
