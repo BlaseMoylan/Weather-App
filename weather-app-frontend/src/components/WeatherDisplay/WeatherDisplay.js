@@ -23,6 +23,7 @@ export default function WeatherDisplay({ lat, long }) {
         // Fetch current weather data and forecasted data when latitude and longitude change
         fetchCurrentData();
         fetchForecastedData();
+        setIsLoading(false)
     }, [lat, long]);
 
     const fetchCurrentData = async () => {
@@ -38,8 +39,6 @@ export default function WeatherDisplay({ lat, long }) {
                 );
 
                 const result = response.data;
-                console.log("$$$$$$$")
-                console.log(response.data)
                 setTodayData(result);
             } catch (error) {
                 console.error('Error fetching weather data:', error);
@@ -70,8 +69,6 @@ export default function WeatherDisplay({ lat, long }) {
             }
         }
     };
-
-    console.log(forecastData);
 
     const getDate = (dt_txt) => dt_txt.split(' ')[0];
 
@@ -162,7 +159,7 @@ export default function WeatherDisplay({ lat, long }) {
         <div className="mainDisplay">
             <div className="today">
                 {/* Display current weather card */}
-                <WeatherCurrCard data={todayData} />
+                {!isLoading && todayData != null ? <WeatherCurrCard data={todayData} />:null}
             </div>
             <div className="forecasted">
                 {/* Display forecasted weather cards */}

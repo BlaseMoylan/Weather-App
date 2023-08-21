@@ -13,7 +13,6 @@ const WeatherCurrCard = ({ data }) => {
   };
 
   // State to store weather data
-  console.log(data)
   const [weatherCardData, setWeatherCardData] = useState({
     temperature: data.main.temp,
     city: data.name,
@@ -26,7 +25,7 @@ const WeatherCurrCard = ({ data }) => {
     // wicon: "",
   });
 
-  
+
 
   return (
     <div className="weather">
@@ -59,7 +58,7 @@ const WeatherCurrCard = ({ data }) => {
                 </div>
                 <div className="parameter-row">
                     <span className="parameter-label">Visibility</span>
-                    <span className="parameter-value">{weatherCardData.visibility}%</span>
+                    <span className="parameter-value">{weatherCardData.visibility} mi</span>
                 </div>
             </div>
         </div>
