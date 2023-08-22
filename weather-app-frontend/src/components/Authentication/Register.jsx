@@ -201,7 +201,7 @@ const Register = () => {
                 </div>
 
                 <div className='auth-group'>
-                    <label>Phone Number (optional)</label>
+                    <label>Phone Number <span className='optional'>(Optional)</span></label>
                     <input
                         type='tel'
                         id='phone_number'
