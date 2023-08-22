@@ -165,10 +165,10 @@ export default function WeatherDisplay({ lat, long }) {
                 {/* Display forecasted weather cards */}
                 {/* look into mapping over the card component */}
                 {/* the card component still needs to be made and imported for this to work!!!! */}
-                {/* <WeatherFutureCard minMax={getTemperatureStats(day1)} averageHumidity={getAverageHumidity(day1)} weatherDescription={getMostCommonWeatherDescription(day1)} date={day1[0].dt_txt.split(" ")[0]} />
-                <WeatherFutureCard minMax={getTemperatureStats(day2)} averageHumidity={getAverageHumidity(day2)} weatherDescription={getMostCommonWeatherDescription(day2)} date={day2[0].dt_txt.split(" ")[0]} />
-                <WeatherFutureCard minMax={getTemperatureStats(day3)} averageHumidity={getAverageHumidity(day3)} weatherDescription={getMostCommonWeatherDescription(day3)} date={day3[0].dt_txt.split(" ")[0]} />
-                <WeatherFutureCard minMax={getTemperatureStats(day4)} averageHumidity={getAverageHumidity(day4)} weatherDescription={getMostCommonWeatherDescription(day4)} date={day4[0].dt_txt.split(" ")[0]} /> */}
+                {!isLoading && day1 != null ? <WeatherFutureCard minMax={getTemperatureStats(day1)} averageHumidity={getAverageHumidity(day1)} weatherDescription={getMostCommonWeatherDescription(day1)} date={day1[0].dt_txt.split(" ")[0]} />:null}
+                {!isLoading && day1 != null ?<WeatherFutureCard minMax={getTemperatureStats(day2)} averageHumidity={getAverageHumidity(day2)} weatherDescription={getMostCommonWeatherDescription(day2)} date={day2[0].dt_txt.split(" ")[0]} />:null}
+                {!isLoading && day1 != null ?<WeatherFutureCard minMax={getTemperatureStats(day3)} averageHumidity={getAverageHumidity(day3)} weatherDescription={getMostCommonWeatherDescription(day3)} date={day3[0].dt_txt.split(" ")[0]} />:null}
+                {!isLoading && day1 != null ?<WeatherFutureCard minMax={getTemperatureStats(day4)} averageHumidity={getAverageHumidity(day4)} weatherDescription={getMostCommonWeatherDescription(day4)} date={day4[0].dt_txt.split(" ")[0]} />:null}
             </div>
         </div>
     );
