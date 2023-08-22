@@ -4,10 +4,10 @@ import React, { useState } from 'react';
 import HomePage from './pages/HomePage';
 
 import Navbar from './components/Navbar/Navbar';
-import Login from './components/Authentication/Login/Login';
-import Register from './components/Authentication/Register/Register';
-import ForgotPassword from './components/Authentication/ForgotPassword/ForgotPassword';
-import ResetPassword from './components/Authentication/ResetPassword/ResetPassword';
+import Login from './components/Authentication/Login';
+import Register from './components/Authentication/Register';
+import ForgotPassword from './components/Authentication/ForgotPassword';
+import ResetPassword from './components/Authentication/ResetPassword';
 import './App.scss';
 
 /**

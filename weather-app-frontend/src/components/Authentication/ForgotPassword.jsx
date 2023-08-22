@@ -1,9 +1,8 @@
 import { useContext, useEffect, useRef } from 'react'
 
-import AuthContext from '../../../context/AuthContext'
-import useCustomForm from '../../../hooks/useCustomForm'
-import '../Authenticate.scss'
-import './ForgotPassword.scss'
+import AuthContext from '../../context/AuthContext'
+import useCustomForm from '../../hooks/useCustomForm'
+import './Authenticate.scss';
 
 const ForgotPassword = () => {
 
@@ -19,14 +18,14 @@ const ForgotPassword = () => {
     }, []);
 
     return (
-        <div className='authenticate' onSubmit={handleSubmit}>
-            <form className='authentication-form forgot-password'>
+        <div className={'full-height center'}>
+            <form className='auth-form' onSubmit={handleSubmit}>
 
                 <h2>Forgot Password</h2>
 
-                <p className='message'>Input the email that is attached to the account. An email will be sent if an account is found.</p>
+                <p>Input the email that is attached to the account. An email will be sent if an account is found.</p>
 
-                <div className='form-group'>
+                <div className='auth-group'>
                     <label>Email</label>
                     <input
                         type='email'

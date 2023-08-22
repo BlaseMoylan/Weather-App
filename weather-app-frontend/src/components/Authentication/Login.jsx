@@ -1,10 +1,9 @@
 import { useContext, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import AuthContext from '../../../context/AuthContext';
-import useCustomForm from '../../../hooks/useCustomForm';
-import '../Authenticate.scss';
-import './Login.scss';
+import AuthContext from '../../context/AuthContext';
+import useCustomForm from '../../hooks/useCustomForm';
+import './Authenticate.scss';
 
 const Login = () => {
 
@@ -20,11 +19,11 @@ const Login = () => {
     }, []);
 
     return (
-        <div className='authenticate' >
-            <form className='authentication-form' onSubmit={handleSubmit}>
+        <div className={'full-height center'} >
+            <form className='auth-form' onSubmit={handleSubmit}>
                 <h2>Login</h2>
 
-                <div className='form-group'>
+                <div className='auth-group'>
                     <label>Email</label>
                     <input
                         type='email'
@@ -37,7 +36,7 @@ const Login = () => {
                     />
                 </div>
 
-                <div className='form-group'>
+                <div className='auth-group'>
                     <label>Password</label>
                     <input
                         type='password'
@@ -49,9 +48,9 @@ const Login = () => {
                     />
                 </div>
 
-                <div className='login-btn-area'>
-                    <Link className='forgot-password' to={'/forgotpassword'}>Forgot Password</Link>
-                    <Link to={'/register'}>Sign-up</Link>
+                <div className='auth-links-container'>
+                    <Link className='auth-link' to={'/forgotpassword'}>Forgot Password</Link>
+                    <Link className='auth-link' to={'/register'}>Sign-up</Link>
                 </div>
 
                 <input type='submit' />

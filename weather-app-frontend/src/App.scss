@@ -6,24 +6,40 @@
   box-sizing: border-box;
 }
 
-main{
-  padding-top: 50px;
+:root{
+  --navbar-height: 4rem;
+  --primary-color: #01579b;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-.loading-container {
-  transition: opacity 0.5s ease;
-  opacity: 1;
+.full-height{
+  min-height: calc(100vh - var(--navbar-height));
 }
 
-.loading-container.fade-out {
-  transition: opacity 0.5s ease;
-  opacity: 0;
+.center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+.right{
+  display: flex;
+  justify-content: flex-end;
+}
+
+// @keyframes App-logo-spin {
+//   from {
+//     transform: rotate(0deg);
+//   }
+//   to {
+//     transform: rotate(360deg);
+//   }
+// }
+// .loading-container {
+//   transition: opacity 0.5s ease;
+//   opacity: 1;
+// }
+
+// .loading-container.fade-out {
+//   transition: opacity 0.5s ease;
+//   opacity: 0;
+// }
