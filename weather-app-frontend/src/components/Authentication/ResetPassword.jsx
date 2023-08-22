@@ -1,25 +1,23 @@
-import { useContext, useRef, useState, useEffect } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
 import { faCheck, faTimes,faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-import AuthContext from '../../../context/AuthContext';
-import '../Authenticate.scss';
-import './Register.scss'
+import AuthContext from '../../context/AuthContext';
+import './Authenticate.scss';
+import './Verification.scss';
 
-const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 const PWD_REGEX = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%-]).{8,24}$/
 
-const Register = () => {
+const ResetPassword = () => {
 
-    const { registerUser } = useContext(AuthContext)
+    const { resetUserPassword } = useContext(AuthContext)
+    const { resetCode } = useParams()
 
-    const emailRef = useRef()
+    const pwdRef = useRef()
     const errRef = useRef()
 
-    const [email, setEmail] = useState('');
-    const [validEmail, setValidEmail] = useState(false);
-    const [emailFocus, setEmailFocus] = useState(false);
+    const [errMsg, setErrMsg] = useState('');
 
     const [pwd, setPwd] = useState('');
     const [validPwd, setValidPwd] = useState(false);
@@ -29,101 +27,46 @@ const Register = () => {
     const [validMatch, setValidMatch] = useState(false);
     const [matchFocus, setMatchFocus] = useState(false);
 
-    const [phoneNumber, setPhoneNumber] = useState('');
-
-    const [errMsg, setErrMsg] = useState('');
-
-    //Set Focus to email input
     useEffect(() => {
-        emailRef.current.focus()
+        pwdRef.current.focus()
     }, []);
 
-    //Verifies Email
-    useEffect(() => {
-        setValidEmail(EMAIL_REGEX.test(email))
-    }, [email]);
-
-    //Verifies Password and Confirm Password
     useEffect(() => {
         setValidPwd(PWD_REGEX.test(pwd))
         setValidMatch(pwd === matchPwd)
     }, [pwd, matchPwd]);
 
-    //Clears Error Message
     useEffect(() => {
         setErrMsg('')
-    }, [email, pwd, matchPwd]);
+    }, [pwd, matchPwd]);
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault()
 
-        //if button enabled with JS hack
-        const v1 = EMAIL_REGEX.test(email)
-        const v2 = PWD_REGEX.test(pwd)
-        if(!v1 || !v2){
+        if(!PWD_REGEX.test(pwd)){
             setErrMsg('Invalid Entry')
             errRef.current.focus()
             return
         }
 
-        setErrMsg(await registerUser({
-            email: email,
-            password: pwd,
-            phoneNumber: phoneNumber
-        }))
-        errRef.current.focus()
+        resetUserPassword({
+            new_password: pwd,
+            token: resetCode
+        })
+
     }
 
     return (
-        <div className='authenticate' >
-            <form className={'authentication-form'} onSubmit={handleSubmit}>
+        <div className={'full-height center'} >
+            <form className='auth-form' onSubmit={handleSubmit} >
 
-                <h2>Sign-up</h2>
+                <h2>Password Reset</h2>
 
                 <p ref={errRef} className={errMsg ? 'errMsg' : 'offscreen'} aria-live='assertive'>
                     {errMsg}
                 </p>
 
-                <div className='form-group'>
-                    <label htmlFor='email'>
-                        Email
-
-                        <span className={validEmail ? 'valid' : 'hide'}>
-                            <FontAwesomeIcon icon={faCheck} className='check'/>
-                        </span>
-
-                        <span className={validEmail || !email ? 'hide' : 'invalid'}>
-                            <FontAwesomeIcon icon={faTimes} className='wrong'/>
-                        </span>
-                    </label>
-
-                    <input
-                        type='email'
-                        id='email'
-                        ref={emailRef}
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        onFocus={() => setEmailFocus(true)}
-                        onBlur={() => setEmailFocus(false)}
-                        aria-invalid={validEmail ? 'false' : 'true'}
-                        aria-describedby='email_note'
-                        autoComplete='off'
-                        required
-                    />
-
-                    <div id='email_note' className={emailFocus && email && !validEmail ? 'instructions' : 'offscreen'}>
-                        <FontAwesomeIcon icon={faInfoCircle} className='info-icon'/>
-                        <p>
-                            <span aria-label='Your Email'>YourEmail</span>
-                            <span aria-label='at symbol'>@</span>
-                            Example
-                            <span aria-label='dot'>.</span>
-                            com
-                        </p>
-                    </div>
-                </div>
-
-                <div className='form-group'>
+                <div className='auth-group'>
                     <label htmlFor='password'>
                         Password
 
@@ -140,6 +83,7 @@ const Register = () => {
                         type='password'
                         id='password'
                         value={pwd}
+                        ref={pwdRef}
                         onChange={(e) => setPwd(e.target.value)}
                         onFocus={() => setPwdFocus(true)}
                         onBlur={() => setPwdFocus(false)}
@@ -169,7 +113,7 @@ const Register = () => {
                     </div>
                 </div>
 
-                <div className='form-group'>
+                <div className='auth-group'>
                     <label htmlFor='confirm_password'>
                         Confirm Password
 
@@ -200,26 +144,10 @@ const Register = () => {
                     </div>
                 </div>
 
-                <div className='form-group'>
-                    <label>Phone Number (optional)</label>
-                    <input
-                        type='tel'
-                        id='phone_number'
-                        value={phoneNumber}
-                        onChange={(e) => setPhoneNumber(e.target.value)}
-                        autoComplete='off'
-                    />
-                </div>
-
-                <input type='submit' disabled={!validEmail || !validPwd || !validMatch ? true : false}/>
-
-                <p className='sign-in'>
-                    Already registered?<br/>
-                    <Link to={'/login'}>Sign In</Link>
-                </p>
+                <input type='submit' disabled={!validPwd || !validMatch ? true : false}/>
             </form>
         </div>
     );
 }
 
-export default Register;
+export default ResetPassword;
