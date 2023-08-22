@@ -29,20 +29,20 @@ const Navbar = ({setLong, setLat}) => {
                     <SearchBox value={value} onChange={(change)=>setValue(change)} onRetrieve={(result) => chosenLocation(result)} theme={{variables:{boxShadow:'none'}}}  options={{types:'city', language:'en'}} accessToken='pk.eyJ1IjoiYy1yb21hbmNhbnRyZWxsIiwiYSI6ImNsZ3h6MmliOTA0Z3IzZXBpZWpqOWNtbzQifQ.AA1tCkKxeoIpw4YGUsYTJQ' />
                 </div>
 
-                <div>
-                    <Link to={'/home'}>
-                        <h1>MySkies</h1>
-                    </Link>
+                <div className='center'>
+                    <Link className='logo' to={'/home'}>MySkies</Link>
                 </div>
 
-                {user ?
-                    <button onClick={logoutUser}>{user.email}</button>
-                :
-                    <div>
-                        <Link className='login-signup' to={'/login'}>login</Link>
-                        <Link className='login-signup' to={'/register'}>sign-up</Link>
-                    </div>
-                }
+                <div className='right'>
+                    {user ?
+                        <button onClick={logoutUser}>{user.email}</button>
+                    :
+                        <>
+                            <Link className='login-signup' to={'/login'}>login</Link>
+                            <Link className='login-signup' to={'/register'}>sign-up</Link>
+                        </>
+                    }
+                </div>
 
             </nav>
         </>
