@@ -2,6 +2,7 @@ import { useState, useRef, useEffect, useContext } from 'react';
 import { faCheck, faTimes,faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import AuthContext from '../../context/AuthContext';
 import './Authenticate.scss';
@@ -11,6 +12,7 @@ const PWD_REGEX = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%-]).{8,24}$/
 
 const ResetPassword = () => {
 
+    const navigate = useNavigate()
     const { resetUserPassword } = useContext(AuthContext)
     const { resetCode } = useParams()
 
@@ -53,7 +55,6 @@ const ResetPassword = () => {
             new_password: pwd,
             token: resetCode
         })
-
     }
 
     return (

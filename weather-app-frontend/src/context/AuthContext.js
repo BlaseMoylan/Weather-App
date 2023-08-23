@@ -73,6 +73,7 @@ export const AuthProvider = ({children}) => {
                 setIsServerError(false)
             }
 
+            navigate('/home')
         }catch(error){
             console.log(error)
             setIsServerError(true)
@@ -90,18 +91,20 @@ export const AuthProvider = ({children}) => {
     const forgotPassword = async (forgotPasswordData) => {
         try{
             let response = await axios.post(`${baseUrl}/auth/forgot_password`, forgotPasswordData)
-            console.log(response.data)
+            alert('Check email for reset code')
+            navigate('/home')
         }catch(error){
-            console.log(error)
+            alert(error)
         }
     }
 
     const resetUserPassword = async (resetData) => {
         try{
             let response = await axios.post(`${baseUrl}/auth/reset_password`, resetData)
-            console.log(response.data)
+            alert('Password Reset Successful')
+            navigate('/login')
         }catch(error){
-            console.log(error)
+            alert(error)
         }
     }
 
