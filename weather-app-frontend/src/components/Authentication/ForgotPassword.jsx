@@ -1,4 +1,5 @@
 import { useContext, useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 import AuthContext from '../../context/AuthContext'
 import useCustomForm from '../../hooks/useCustomForm'
@@ -8,6 +9,7 @@ const ForgotPassword = () => {
 
     const { forgotPassword } = useContext(AuthContext)
 
+    const navigate = useNavigate()
     const emailRef = useRef()
 
     const defaultValues = {email: ""}

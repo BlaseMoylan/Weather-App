@@ -24,7 +24,7 @@ nav{
     }
 }
 
-.login-signup{
+.nav-button{
     --nav-button-padding: 1rem;
     padding-inline: var(--nav-button-padding);
     background-color: var(--primary-color);
@@ -32,6 +32,7 @@ nav{
     display: flex;
     align-items: center;
     justify-content: center;
+    border: none;
 
     &:hover{
         color: white;

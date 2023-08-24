@@ -33,13 +33,8 @@ export const AuthProvider = ({children}) => {
 
     const registerUser = async (registerData) => {
         try{
-            let finalData = {
-                email: registerData.email,
-                password: registerData.password,
-                phone_number: registerData.phoneNumber
-            }
-
-            let response = await axios.post(`${baseUrl}/auth/register`, finalData)
+            registerData.email = registerData.email.toLowerCase()
+            let response = await axios.post(`${baseUrl}/auth/register`, registerData)
 
             if(response.status === 201){
                 console.log('Successful Registration!')
@@ -61,6 +56,7 @@ export const AuthProvider = ({children}) => {
 
     const loginUser = async (loginData) => {
         try{
+            loginData.email = loginData.email.toLowerCase()
             let response = await axios.post(`${baseUrl}/auth/login`, loginData)
 
             if(response.status === 200){
@@ -73,6 +69,7 @@ export const AuthProvider = ({children}) => {
                 setIsServerError(false)
             }
 
+            navigate('/home')
         }catch(error){
             console.log(error)
             setIsServerError(true)
@@ -89,19 +86,22 @@ export const AuthProvider = ({children}) => {
 
     const forgotPassword = async (forgotPasswordData) => {
         try{
+            forgotPasswordData.email = forgotPasswordData.email.toLowerCase()
             let response = await axios.post(`${baseUrl}/auth/forgot_password`, forgotPasswordData)
-            console.log(response.data)
+            alert('Check email for reset code')
+            navigate('/home')
         }catch(error){
-            console.log(error)
+            alert(error)
         }
     }
 
     const resetUserPassword = async (resetData) => {
         try{
             let response = await axios.post(`${baseUrl}/auth/reset_password`, resetData)
-            console.log(response.data)
+            alert('Password Reset Successful')
+            navigate('/login')
         }catch(error){
-            console.log(error)
+            alert(error)
         }
     }
 

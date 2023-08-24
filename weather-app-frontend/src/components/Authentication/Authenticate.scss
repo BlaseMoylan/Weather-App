@@ -25,6 +25,11 @@
         &:hover:enabled{
             scale: 1.05;
         }
+
+        &:active:enabled{
+            box-shadow: inset 2px 2px 2px black;
+            scale: 1;
+        }
     }
 }
 

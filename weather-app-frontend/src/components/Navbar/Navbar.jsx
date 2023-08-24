@@ -35,11 +35,11 @@ const Navbar = ({setLong, setLat}) => {
 
                 <div className='right'>
                     {user ?
-                        <button onClick={logoutUser}>{user.email}</button>
+                        <button className='nav-button' onClick={logoutUser}>{user.email}</button>
                     :
                         <>
-                            <Link className='login-signup' to={'/login'}>login</Link>
-                            <Link className='login-signup' to={'/register'}>sign-up</Link>
+                            <Link className='nav-button' to={'/login'}>login</Link>
+                            <Link className='nav-button' to={'/register'}>sign-up</Link>
                         </>
                     }
                 </div>
