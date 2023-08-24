@@ -28,6 +28,7 @@ const WeatherCurrCard = ({ data }) => {
 
 
   return (
+    // make this the basis for the future card and make this into the main look of the page (play around with different designs)
     <div className="weather">
         <div className="top">
             <div>
