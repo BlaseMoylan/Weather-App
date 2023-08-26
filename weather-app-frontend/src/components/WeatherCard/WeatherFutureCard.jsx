@@ -3,7 +3,8 @@ const WeatherFutureCard = ({ minMax, averageHumidity, weatherDescription, date }
         window.location.reload();
       };
     return (
-        // turn this into an actual card based on currCard already made
+        // need to come up with a need design for this and also some Icons
+        // there is not much to work with here
         <div className="???">
         <p>Date: {date}</p>
         <p>Temperature: {Math.round(minMax.maxTemp)}°F / {Math.round(minMax.minTemp)}°F</p>
